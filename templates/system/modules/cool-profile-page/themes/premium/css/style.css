@@ -4,35 +4,29 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-/* 980px or more */
-@media (min-width: 800px) {
-    #content {
-        width: 850px;
-    }
-}
-
-.block {
-
-}
-
 h2 {
-    text-transform: uppercase;
-    text-decoration: underline;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    font-size: 1.85rem;
+    overflow: hidden;
 }
 
-.profile-section {
-    padding-bottom: 4rem;
+h2:before,
+h2:after {
+    background-color: #ccc;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
 }
-
-.profile-section::after {
-    position: absolute;
-    left: 40px;
-    right: 40px;
-    content: '';
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #ddd;
+h2:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+h2:after {
+    left: 0.5em;
+    margin-right: -50%;
 }
 
 .chat, .message, .friend, .heart {
@@ -54,4 +48,22 @@ h2 {
 
 .heart {
     color: #F06;
+}
+.shadow {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+.card {
+    margin: 5px;
+    padding: 5px 0 10px 10px;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
 }
