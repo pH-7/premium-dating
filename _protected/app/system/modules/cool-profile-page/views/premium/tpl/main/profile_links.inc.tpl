@@ -1,3 +1,5 @@
+<h2>{lang "Let's Speak"}</h2>
+
 <div class="row">
     {if $is_im_enabled AND !$is_own_profile}
         <a class="vs_marg" rel="nofollow" href="{messenger_link}" title="{lang 'Chat'}">
