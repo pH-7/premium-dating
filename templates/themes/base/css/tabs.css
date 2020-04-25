@@ -61,6 +61,6 @@ ol#toc span {
 /* 1229px or less */
 @media (max-width: 1229px) {
     ol#toc span {
-        border: #2d99e5 solid .5px;
+        border: #2d99e5 solid 1px;
     }
 }
