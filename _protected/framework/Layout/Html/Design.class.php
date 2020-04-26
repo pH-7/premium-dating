@@ -793,7 +793,7 @@ class Design
      *
      * @return void HTML output.
      */
-    public function likeApi()
+    public function socialMediaWidgets()
     {
         if ((bool)DbConfig::getSetting('socialMediaWidgets')) {
             $sHtml = <<<HTML
@@ -811,13 +811,13 @@ HTML;
     }
 
     /**
-     * Add Small size Social Media Widgets.
+     * Add small size of Social Media Widgets.
      *
      * @internal AddToAny JS file will be included through 'ph7_static_files' table.
      *
      * @return void HTML output.
      */
-    public function littleLikeApi()
+    public function littleSocialMediaWidgets()
     {
         if ((bool)DbConfig::getSetting('socialMediaWidgets')) {
             $sHtml = <<<HTML

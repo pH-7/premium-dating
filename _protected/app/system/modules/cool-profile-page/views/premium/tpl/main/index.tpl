@@ -185,7 +185,6 @@
 
                 {manual_include 'profile_links.inc.tpl'}
             </div>
-            {{ $design->likeApi() }}
         </div>
     </div>
 
