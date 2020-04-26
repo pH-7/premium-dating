@@ -538,11 +538,11 @@
 
             <form method="get" action="{{ $design->url('user', 'browse', 'index') }}/" class="navbar-form navbar-right">
               <div class="input-group">
-                <input type="search" name="sex" class="form-control"
+                <input type="search" name="sex" style="width:300px" class="form-control"
                        placeholder="{lang 'Man, Woman, Couple?'}" required="required">
                 <div class="input-group-btn">
                   <button class="btn btn-default" type="submit">
-                    <i class="glyphicon glyphicon-search"></i>
+                    <i class="fa fa-search" aria-hidden="true"></i>
                   </button>
                 </div>
               </div>

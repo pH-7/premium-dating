@@ -1,7 +1,7 @@
 <div class="col-md-11 col-sm-11 col-xs-12 col-md-offset-1 col-sm-offset-1" itemscope="itemscope"
      itemtype="http://schema.org/Person">
 
-    <div class="col-md-11">
+    <div class="col-xs-10 col-xs-offset-1">
         {manual_include 'cover_photo.inc.tpl'}
     </div>
 
