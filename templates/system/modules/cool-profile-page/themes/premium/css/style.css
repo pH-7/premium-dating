@@ -20,10 +20,12 @@ h2:after {
     vertical-align: middle;
     width: 50%;
 }
+
 h2:before {
     right: 0.5em;
     margin-left: -50%;
 }
+
 h2:after {
     left: 0.5em;
     margin-right: -50%;
@@ -49,12 +51,14 @@ h2:after {
 .heart {
     color: #F06;
 }
+
 .shadow {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
 }
+
 .card {
     margin: 5px;
-    padding: 5px 0 10px 10px;
+    padding: 0 10px 10px 10px;
     position: relative;
     display: -ms-flexbox;
     display: flex;

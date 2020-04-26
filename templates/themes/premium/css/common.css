@@ -319,6 +319,10 @@ img, video, iframe {
     max-width: 100%;
 }
 
+.fixed {
+    position: fixed;
+}
+
 /*--- Advertising Available ---*/
 .ad_728_90 {}
 .ad_200_200 {}
