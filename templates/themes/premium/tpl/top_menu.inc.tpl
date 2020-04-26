@@ -535,7 +535,19 @@
       {/if}
 
       </ul>
-    </div><!-- /.navbar-collapse -->
+
+            <form method="get" action="{{ $design->url('user', 'browse', 'index') }}/" class="navbar-form navbar-right">
+              <div class="input-group">
+                <input type="search" name="sex" class="form-control"
+                       placeholder="{lang 'Man, Woman, Couple?'}" required="required">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
