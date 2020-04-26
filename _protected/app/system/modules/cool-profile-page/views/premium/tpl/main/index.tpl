@@ -17,46 +17,33 @@
 
                 {{ UserDesignCoreModel::userStatus($id) }}
                 {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
-
-                {if !empty($punchline)}
-                    <div class="profile-section">
-                        <h1 class="cinnabar-red italic center">{punchline}</h1>
-                    </div>
-                {/if}
-
-                {if !empty($description)}
-                    <div class="profile-section">
-                        <h2>{lang 'A Little About Me'}</h2>
-                        <div itemprop="description" class="quote italic center">{description}</div>
-                    </div>
-                {/if}
-
-                <div class="center small">
-                    {if !empty($join_date)}
-                        {lang 'Join Date:'} <span class="italic">{join_date}</span> •
-                    {/if}
-
-                    {if !empty($last_activity)}
-                        {lang 'Last Activity:'} <span class="italic">{last_activity}</span> •
-                    {/if}
-
-                    {lang 'Views:'}
-                    <span class="italic">
-                        {% Framework\Mvc\Model\Statistic::getView($id,DbTableName::MEMBER) %}
-                    </span>
-                </div>
-
-                <p class="center">
-                    {{ $design->like($username, $first_name, $sex) }}
-                </p>
-
-                <div class="ad_160_600">
-                    {designModel.ad(160, 600)}
-                </div>
-
-                {{ CommentDesignCore::link($id, 'profile') }}
             </div>
         </div>
+
+        {if !empty($punchline)}
+            <div class="card shadow col-md-3">
+                <div class="profile-section">
+                    <h3 class="cinnabar-red italic center">{punchline}</h3>
+                </div>
+            </div>
+        {/if}
+
+        {if !empty($description)}
+            <div class="card shadow col-md-3">
+                <div class="profile-section">
+                    <h2>{lang 'A Little About Me'}</h2>
+                    <div itemprop="description" class="quote italic center">{description}</div>
+                </div>
+            </div>
+        {/if}
+
+        <div class="card shadow col-md-3">
+            <p class="center">
+                {{ $design->like($username, $first_name, $sex) }}
+                {{ $design->socialMediaWidgets() }}
+            </p>
+        </div>
+
 
         <div class="card shadow col-md-7">
             <h2>{lang 'Information'}</h2>
