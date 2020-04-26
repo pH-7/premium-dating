@@ -1,11 +1,12 @@
-{if !empty($img_background)}
-    {manual_include 'cover_photo.inc.tpl'}
-{/if}
-
 <div class="col-md-11 col-sm-11 col-xs-12 col-md-offset-1 col-sm-offset-1" itemscope="itemscope"
      itemtype="http://schema.org/Person">
+
+    <div class="col-md-11">
+        {manual_include 'cover_photo.inc.tpl'}
+    </div>
+
     <div class="row">
-        <div class="col-md-4 col-sm-3 col-xs-2">
+        <div class="col-md-4 col-sm-3 col-xs-12">
             <div class="row">
                 <div class="card shadow">
                     <h2 itemprop="name">
@@ -21,7 +22,7 @@
                     <div class="center img-rounded">
                         {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
                     </div>
-                    </div>
+                </div>
             </div>
 
             {if !empty($punchline)}
@@ -49,7 +50,7 @@
             </div>
         </div>
 
-        <div class="col-md-8 col-sm-9 col-xs-10">
+        <div class="col-md-8 col-sm-9 col-xs-12">
             <div class="row">
                 <div class="card shadow center">
                     <h2>{lang 'Information'}</h2>
@@ -192,7 +193,7 @@
     </div>
 
     <div class="row">
-        <div class="pull-left col-md-11 col-sm-11 col-xs-12 col-md-offset-1 col-sm-offset-1">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             {if $is_map_enabled}
                 <div class="row">
                     <div class="card shadow s_bMarg">
