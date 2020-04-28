@@ -547,11 +547,6 @@
               <div class="input-group">
                 <input type="search" name="sex" style="width:300px" class="form-control"
                        placeholder="{lang 'Man, Woman, Couple?'}" required="required">
-                <div class="input-group-btn">
-                  <button class="btn btn-default" type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </button>
-                </div>
               </div>
             </form>
           </div><!-- /.navbar-collapse -->
