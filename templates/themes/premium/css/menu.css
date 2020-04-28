@@ -2,6 +2,10 @@
     color: #9d9d9d;
 }
 
+.navbar #logo a h1 {
+    font-size: 13px;
+}
+
 .navbar #logo a:hover, .navbar #logo a:active {
     color: #fff;
     text-decoration: none;
