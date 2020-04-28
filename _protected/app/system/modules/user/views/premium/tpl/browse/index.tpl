@@ -1,5 +1,5 @@
 <div class="box-left col-md-3 col-lg-3 col-xl-2">
-    <div role="search" class="design-box">
+    <div role="search">
         {{ FastUserCoreForm::display() }}
     </div>
 </div>
