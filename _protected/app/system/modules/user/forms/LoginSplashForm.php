@@ -32,7 +32,12 @@ class LoginSplashForm
         }
 
         $oForm = new \PFBC\Form('form_login_user');
-        $oForm->configure(['view' => new Horizontal, 'action' => Uri::get('user', 'main', 'login')]);
+        $oForm->configure(
+            [
+                'view' => new Horizontal,
+                'action' => Uri::get('user', 'main', 'login')
+            ]
+        );
         $oForm->addElement(new Hidden('submit_login_user', 'form_login_user'));
         $oForm->addElement(new Token('login'));
         $oForm->addElement(new Email('', 'mail', ['placeholder' => t('Your Email'), 'style' => 'width:190px', 'required' => 1], false));
