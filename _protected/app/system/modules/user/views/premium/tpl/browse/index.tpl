@@ -1,4 +1,4 @@
-<div class="col-md-9 col-lg-9 col-xl-9 col-xl-offset-1">
+<div class="col-xs-12 col-sm-11 col-md-11 col-md-offset-1">
     <div role="search">
         {{ FastUserCoreForm::display() }}
     </div>

@@ -10,11 +10,11 @@
 
 namespace PH7;
 
-use PFBC\Element\Age;
 use PFBC\Element\Button;
 use PFBC\Element\Checkbox;
 use PFBC\Element\Hidden;
 use PFBC\Element\HTMLExternal;
+use PFBC\Element\Range;
 use PFBC\Element\Select;
 use PFBC\Element\Textbox;
 use PFBC\View\Horizontal;
@@ -78,8 +78,14 @@ class FastUserCoreForm
                 self::$aMatchSexOption
             )
         );
-        $oForm->addElement(new Age(self::$aAgeOption));
-        $oForm->addElement(new Select(t('Country:'), SearchQueryCore::COUNTRY, Form::getCountryValues(), self::$aCountryOption));
+        $oForm->addElement(
+            new Range(
+                t('Age Range'),
+                'age',
+                self::$aAgeOption
+            )
+        );
+        $oForm->addElement(new Hidden(SearchQueryCore::COUNTRY, 'fr_FR'));
         $oForm->addElement(new Textbox(t('City:'), SearchQueryCore::CITY, self::$aCityOption));
         $oForm->addElement(new Checkbox('', SearchQueryCore::ORDER, [SearchCoreModel::LATEST => '<span class="bold">' . t('Latest members') . '</span>'], self::$aLatestOrder));
         $oForm->addElement(new Checkbox('', SearchQueryCore::AVATAR, ['1' => '<span class="bold">' . t('Only with Avatar') . '</span>'], self::$aAvatarOnly));
@@ -88,55 +94,6 @@ class FastUserCoreForm
         $oForm->addElement(new HTMLExternal('<p class="center"><a href="' . Uri::get('user', 'search', 'advanced') . '">' . t('Advanced Search') . '</a></p>'));
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
-    }
-
-    /**
-     * If a user is logged, get the relative 'user_sex' and 'match_sex' for better and more intuitive search.
-     *
-     * @param UserCoreModel $oUserModel
-     * @param Session $oSession
-     *
-     * @return array The 'user_sex' and 'match_sex'
-     */
-    protected static function getGenderVals(UserCoreModel $oUserModel, Session $oSession)
-    {
-        $sUserSex = GenderTypeUserCore::MALE;
-        $aMatchSex = [
-            GenderTypeUserCore::MALE,
-            GenderTypeUserCore::FEMALE,
-            GenderTypeUserCore::COUPLE
-        ];
-
-        if (UserCore::auth()) {
-            $sUserSex = $oUserModel->getSex($oSession->get('member_id'));
-            $aMatchSex = Form::getVal($oUserModel->getMatchSex($oSession->get('member_id')));
-        }
-
-        return ['user_sex' => $sUserSex, 'match_sex' => $aMatchSex];
-    }
-
-    /**
-     * If a user is logged, get "approximately" the relative age for better and more intuitive search.
-     *
-     * @param UserCoreModel $oUserModel
-     * @param Session $oSession
-     *
-     * @return array 'min_age' and 'max_age' which is the approximately age the user is looking for.
-     */
-    protected static function getAgeVals(UserCoreModel $oUserModel, Session $oSession)
-    {
-        $iMinAge = (int)DbConfig::getSetting('minAgeRegistration');
-        $iMaxAge = (int)DbConfig::getSetting('maxAgeRegistration');
-
-        if (UserCore::auth()) {
-            $sBirthDate = $oUserModel->getBirthDate($oSession->get('member_id'));
-            $iAge = UserBirthDateCore::getAgeFromBirthDate($sBirthDate);
-
-            $iMinAge = ($iAge - 5 < $iMinAge) ? $iMinAge : $iAge - 5;
-            $iMaxAge = ($iAge + 5 > $iMaxAge) ? $iMaxAge : $iAge + 5;
-        }
-
-        return ['min_age' => $iMinAge, 'max_age' => $iMaxAge];
     }
 
     /**
@@ -198,5 +155,54 @@ class FastUserCoreForm
         if ($oHttpRequest->getExists(SearchQueryCore::ONLINE)) {
             self::$aOnlineOnly += ['value' => '1'];
         }
+    }
+
+    /**
+     * If a user is logged, get the relative 'user_sex' and 'match_sex' for better and more intuitive search.
+     *
+     * @param UserCoreModel $oUserModel
+     * @param Session $oSession
+     *
+     * @return array The 'user_sex' and 'match_sex'
+     */
+    protected static function getGenderVals(UserCoreModel $oUserModel, Session $oSession)
+    {
+        $sUserSex = GenderTypeUserCore::MALE;
+        $aMatchSex = [
+            GenderTypeUserCore::MALE,
+            GenderTypeUserCore::FEMALE,
+            GenderTypeUserCore::COUPLE
+        ];
+
+        if (UserCore::auth()) {
+            $sUserSex = $oUserModel->getSex($oSession->get('member_id'));
+            $aMatchSex = Form::getVal($oUserModel->getMatchSex($oSession->get('member_id')));
+        }
+
+        return ['user_sex' => $sUserSex, 'match_sex' => $aMatchSex];
+    }
+
+    /**
+     * If a user is logged, get "approximately" the relative age for better and more intuitive search.
+     *
+     * @param UserCoreModel $oUserModel
+     * @param Session $oSession
+     *
+     * @return array 'min_age' and 'max_age' which is the approximately age the user is looking for.
+     */
+    protected static function getAgeVals(UserCoreModel $oUserModel, Session $oSession)
+    {
+        $iMinAge = (int)DbConfig::getSetting('minAgeRegistration');
+        $iMaxAge = (int)DbConfig::getSetting('maxAgeRegistration');
+
+        if (UserCore::auth()) {
+            $sBirthDate = $oUserModel->getBirthDate($oSession->get('member_id'));
+            $iAge = UserBirthDateCore::getAgeFromBirthDate($sBirthDate);
+
+            $iMinAge = ($iAge - 5 < $iMinAge) ? $iMinAge : $iAge - 5;
+            $iMaxAge = ($iAge + 5 > $iMaxAge) ? $iMaxAge : $iAge + 5;
+        }
+
+        return ['min_age' => $iMinAge, 'max_age' => $iMaxAge];
     }
 }
