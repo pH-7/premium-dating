@@ -46,7 +46,6 @@ body {
 }
 
 .navbar #logo {
-    margin-top: 3px;
     overflow: hidden;
 }
 
@@ -57,6 +56,10 @@ body {
 
 #logo h1::first-letter {
     text-transform: none;
+}
+
+.navbar-brand {
+    padding: 8px 15px;
 }
 
 /* Allowing logo name starting by a lowercase like "pH7" */
