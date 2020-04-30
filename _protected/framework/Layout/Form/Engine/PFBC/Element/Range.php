@@ -28,7 +28,7 @@ class Range extends Textbox
      */
     private function getOutputIdName()
     {
-        return 'rangeOutput' . mt_rand(1, 10) . '_';
+        return 'rangeOutput' . mt_rand(1, 10);
     }
 
     /**
@@ -36,6 +36,6 @@ class Range extends Textbox
      */
     private function getRangeInputName()
     {
-        return 'rangeInput' . mt_rand(1, 10) . '_';
+        return 'rangeInput' . mt_rand(1, 10);
     }
 }

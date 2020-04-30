@@ -7,24 +7,6 @@
 
     <div class="row">
         <div class="col-md-4 col-sm-3 col-xs-12">
-            <div class="row">
-                <div class="card shadow">
-                    <h2 itemprop="name">
-                        <span itemprop="name">{first_name}</span> {middle_name} <span
-                                itemprop="familyName">{last_name}</span>
-                        {if empty($last_name) OR empty($middle_name)}
-                            {* Display the username if middle or last name is empty *}
-                            <span itemprop="additionalName" class="irelatedtalic">({username})</span>
-                        {/if}
-                        {{ $design->report($id, $username, $first_name, $sex) }}
-                    </h2>
-
-                    <div class="center img-rounded">
-                        {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
-                    </div>
-                </div>
-            </div>
-
             {if !empty($punchline)}
                 <div class="row">
                     <div class="card shadow">
@@ -43,10 +25,29 @@
             {/if}
 
             <div class="row">
-                <p class="card shadow center">
+                <div class="card shadow">
+                    <h2 itemprop="name">
+                        <span itemprop="name">{first_name}</span> {middle_name} <span
+                                itemprop="familyName">{last_name}</span>
+                        {if empty($last_name) OR empty($middle_name)}
+                            {* Display the username if middle or last name is empty *}
+                            <span itemprop="additionalName" class="irelatedtalic">({username})</span>
+                        {/if}
+                        {{ $design->report($id, $username, $first_name, $sex) }}
+                    </h2>
+
+                    <div class="center img-rounded">
+                        {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card shadow center">
+                    <h2>{lang 'Like / Share'}</h2>
                     {{ $design->like($username, $first_name, $sex) }}
                     {{ $design->socialMediaWidgets() }}
-                </p>
+                </div>
             </div>
         </div>
 
