@@ -10,7 +10,7 @@
             {{ $country_name = t($user->country) }}
             {{ $age = UserBirthDateCore::getAgeFromBirthDate($user->birthDate) }}
 
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 thumb_photo">
+            <div class="col-sm-4 col-md-3 col-lg-3 thumb_photo">
                 {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, 100) }}
                 <p class="cy_ico">
                     <a href="{% (new UserCore)->getProfileLink($user->username) %}">
