@@ -15,7 +15,7 @@ body, td, pre {
 }
 
 body {
-    background: white url(../img/body_bg.jpg) repeat-x;
+    background-color: #ffeded;
 }
 
 #links {
