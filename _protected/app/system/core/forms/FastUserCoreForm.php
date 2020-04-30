@@ -91,7 +91,6 @@ class FastUserCoreForm
         $oForm->addElement(new Checkbox('', SearchQueryCore::AVATAR, ['1' => '<span class="bold">' . t('Only with Avatar') . '</span>'], self::$aAvatarOnly));
         $oForm->addElement(new Checkbox('', SearchQueryCore::ONLINE, ['1' => '<span class="bold green2">' . t('Only Online') . '</span>'], self::$aOnlineOnly));
         $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
-        $oForm->addElement(new HTMLExternal('<p class="center"><a href="' . Uri::get('user', 'search', 'advanced') . '">' . t('Advanced Search') . '</a></p>'));
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
     }

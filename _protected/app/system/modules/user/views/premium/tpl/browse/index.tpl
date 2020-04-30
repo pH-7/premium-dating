@@ -35,4 +35,14 @@
 
         {main_include 'page_nav.inc.tpl'}
     {/if}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="center">
+                <a class="italic" href="{{ $design->url('user', 'search', 'advanced') }}">
+                    {lang 'Advanced Search'}
+                </a>
+            </p>
+        </div>
+    </div>
 </div>
