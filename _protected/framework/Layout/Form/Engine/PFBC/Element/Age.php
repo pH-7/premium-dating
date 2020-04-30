@@ -14,9 +14,6 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Age extends OptionElement
 {
-    const MIN_AGE_TYPE = 'min_age';
-    const MAX_AGE_TYPE = 'max_age';
-
     /** @var string */
     private $sHtmlOutput;
 
@@ -39,9 +36,21 @@ class Age extends OptionElement
         $this->iMaxAge = (int)DbConfig::getSetting('maxAgeRegistration');
 
         $this->sHtmlOutput = '<div class="pfbc-label"><label><strong>*</strong> ' . t('Age Range') . '</label></div>';
-        $this->sHtmlOutput .= '<input type="number" name="age1" placeholder="' . ($this->iMinAge + 5) . '" min="' . $this->iMinAge . '" max="' . ($this->iMaxAge - 1) . '" />';
+
+        $this->sHtmlOutput .= sprintf(
+            '<input type="number" name="age1" placeholder="%d" min="%d" max="%d" />',
+            $this->iMinAge + 5,
+            $this->iMinAge,
+            $this->iMaxAge - 1
+        );
+
         $this->sHtmlOutput .= ' - ';
-        $this->sHtmlOutput .= '<input type="number" name="age2" placeholder="' . ($this->iMaxAge - 10) . '" min="' . ($this->iMinAge + 1) . '" max="' . $this->iMaxAge . '" />';
+
+        $this->sHtmlOutput .= sprintf('<input type="number" name="age2" placeholder="%d" min="%d" max="%d" />',
+            $this->iMaxAge - 10,
+            $this->iMinAge + 1,
+            $this->iMaxAge
+        );
     }
 
     public function render()
