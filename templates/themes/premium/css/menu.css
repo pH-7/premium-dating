@@ -1,3 +1,11 @@
+.bottom_nav {
+    float: right;
+}
+
+.bottom_nav a {
+    text-decoration: underline;
+}
+
 .navbar #logo a {
     color: #9d9d9d;
 }
