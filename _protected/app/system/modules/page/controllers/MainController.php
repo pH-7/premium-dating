@@ -28,6 +28,7 @@ class MainController extends Controller
 
         // Global variable for all template pages of this module
         $this->view->admin_email = DbConfig::getSetting('adminEmail');
+        $this->view->website_creation_date = StatisticCoreModel::getDateOfCreation();
     }
 
     public function index()
