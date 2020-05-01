@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use PFBC\Element\Age;
 use PFBC\Element\Button;
 use PFBC\Element\Checkbox;
 use PFBC\Element\Hidden;
@@ -77,9 +78,8 @@ class FastSearchUserCoreForm
             )
         );
         $oForm->addElement(
-            new Range(
+            new Age(
                 t('Age Range'),
-                'age',
                 self::$aAgeOption
             )
         );
