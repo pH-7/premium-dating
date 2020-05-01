@@ -24,7 +24,7 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
 
-class FastUserCoreForm
+class FastSearchUserCoreForm
 {
     /**
      * Default field attributes.
@@ -60,8 +60,7 @@ class FastUserCoreForm
                 SearchQueryCore::MATCH_SEX,
                 [
                     GenderTypeUserCore::MALE => t('Man'),
-                    GenderTypeUserCore::FEMALE => t('Woman'),
-                    GenderTypeUserCore::COUPLE => t('Couple')
+                    GenderTypeUserCore::FEMALE => t('Woman')
                 ],
                 self::$aSexOption
             )
@@ -72,8 +71,7 @@ class FastUserCoreForm
                 SearchQueryCore::SEX,
                 [
                     GenderTypeUserCore::FEMALE => t('Woman'),
-                    GenderTypeUserCore::MALE => t('Man'),
-                    GenderTypeUserCore::COUPLE => t('Couple')
+                    GenderTypeUserCore::MALE => t('Man')
                 ],
                 self::$aMatchSexOption
             )
