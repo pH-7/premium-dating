@@ -83,7 +83,7 @@ class FastSearchUserCoreForm
                 self::$aAgeOption
             )
         );
-        $oForm->addElement(new Hidden(SearchQueryCore::COUNTRY, 'fr_FR'));
+        //$oForm->addElement(new Hidden(SearchQueryCore::COUNTRY, 'fr'));
         $oForm->addElement(new Textbox(t('City:'), SearchQueryCore::CITY, self::$aCityOption));
         $oForm->addElement(new Checkbox('', SearchQueryCore::ORDER, [SearchCoreModel::LATEST => '<span class="bold">' . t('Newest') . '</span>'], self::$aLatestOrder));
         $oForm->addElement(new Checkbox('', SearchQueryCore::AVATAR, ['1' => '<span class="bold">' . t('With photo') . '</span>'], self::$aAvatarOnly));
