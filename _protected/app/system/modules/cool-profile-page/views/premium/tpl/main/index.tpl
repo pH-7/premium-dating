@@ -6,6 +6,7 @@
     </div>
 
     <div class="row">
+        <h2>{lang 'A <span class="pH1">%0%</span> of <span class="pH3">%1% years</span>, from <span class="pH2">%2%, %3% %4%', t($oUser->sex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']}</span></h2>
         <div class="col-md-4 col-sm-3 col-xs-12">
             {if !empty($punchline)}
                 <div class="row">
