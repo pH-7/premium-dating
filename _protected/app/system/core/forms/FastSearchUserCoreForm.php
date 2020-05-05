@@ -14,7 +14,7 @@ use PFBC\Element\Button;
 use PFBC\Element\Checkbox;
 use PFBC\Element\Hidden;
 use PFBC\Element\HTMLExternal;
-use PFBC\Element\Range;
+use PFBC\Element\AgeRange;
 use PFBC\Element\Select;
 use PFBC\Element\Textbox;
 use PFBC\View\Horizontal;
@@ -77,7 +77,7 @@ class FastSearchUserCoreForm
             )
         );
         $oForm->addElement(
-            new Range(
+            new AgeRange(
                 t('Age Range'),
                 'age_range',
                 self::$aAgeOption

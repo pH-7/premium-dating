@@ -23,13 +23,6 @@ class Range extends Textbox
         echo '<script>$(function(){$("#' . $sOutputIdName . '").val($("#' . $sRangeInputIdName . '").val())});</script>';
     }
 
-    public function getJSFiles()
-    {
-        return [
-            $this->form->getResourcesPath() . '/js/nouislider.js'
-        ];
-    }
-
     /**
      * @return string
      */
