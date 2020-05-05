@@ -10,7 +10,6 @@
 
 namespace PH7;
 
-use PFBC\Element\Age;
 use PFBC\Element\Button;
 use PFBC\Element\Checkbox;
 use PFBC\Element\Hidden;
@@ -78,8 +77,9 @@ class FastSearchUserCoreForm
             )
         );
         $oForm->addElement(
-            new Age(
+            new Range(
                 t('Age Range'),
+                'age_range',
                 self::$aAgeOption
             )
         );
@@ -116,13 +116,10 @@ class FastSearchUserCoreForm
             self::$aMatchSexOption += ['value' => self::getGenderVals($oUserModel, $oSession)['match_sex']];
         }
 
-        self::$aAgeOption = ['value' => self::getAgeVals($oUserModel, $oSession)];
+        self::$aAgeOption = self::getAgeVals($oUserModel, $oSession);
         if ($oHttpRequest->getExists([SearchQueryCore::MIN_AGE, SearchQueryCore::MAX_AGE])) {
-            self::$aAgeOption = [
-                'value' => [
-                    'min_age' => $oHttpRequest->get(SearchQueryCore::MIN_AGE),
-                    'max_age' => $oHttpRequest->get(SearchQueryCore::MAX_AGE)
-                ]
+            self::$aAgeOption += [
+                'value' => [$oHttpRequest->get(SearchQueryCore::MIN_AGE)]
             ];
         }
 
@@ -200,6 +197,9 @@ class FastSearchUserCoreForm
             $iMaxAge = ($iAge + 5 > $iMaxAge) ? $iMaxAge : $iAge + 5;
         }
 
-        return ['min_age' => $iMinAge, 'max_age' => $iMaxAge];
+        return [
+            'value' => implode(',', [$iMinAge, $iMaxAge]),
+            'multiple' => 'multiple'
+        ];
     }
 }
