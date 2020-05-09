@@ -32,14 +32,15 @@ class AgeRange extends OptionElement
     {
         parent::__construct($sLabel, '', [], $aProperties);
 
+        // Set unique output/input ID name to prevent problems if the "range" field is used more than once on the same page
+        $this->sRangeInputIdName = $this->getRangeInputName();
+
         $this->iMinAge = (int)DbConfig::getSetting('minAgeRegistration');
         $this->iMaxAge = (int)DbConfig::getSetting('maxAgeRegistration');
     }
 
     public function render()
     {
-        // Get unique output/input ID name to prevent problems if the "range" field is used more than once on the same page
-        $this->sRangeInputIdName = $this->getRangeInputName();
         parent::render();
 
         echo '<input type="hidden" name="age1" value="' . $this->minAgeDefaultValue() . '" id="min-age-input" />';
@@ -50,18 +51,17 @@ class AgeRange extends OptionElement
 
     public function renderJS()
     {
-        echo 'let slider = document.getElementById("' . $this->sRangeInputIdName . '");';
-        echo 'let minAge = document.getElementById("min-age-input");';
-        echo 'let maxAge = document.getElementById("max-age-input");';
+        echo 'var slider = document.getElementById("' . $this->sRangeInputIdName . '");';
+        echo 'var minAge = document.getElementById("min-age-input");';
+        echo 'var maxAge = document.getElementById("max-age-input");';
 
-        echo <<<JS
-noUiSlider.create(slider, {
-    start: [20, 60],
+        echo 'noUiSlider.create(slider, {
+    start: [' . $this->minAgeDefaultValue() . ', ' . $this->maxAgeDefaultValue() . '],
     keyboardSupport: true,
     tooltips: [true, true],
     range: {
-        'min': 18,
-        'max': 90
+    \'min\':' . $this->iMinAge . ',
+        \'max\':' . $this->iMaxAge . '
     },
     format: {
     from: function(value) {
@@ -73,11 +73,10 @@ noUiSlider.create(slider, {
     }
 });
 
-slider.noUiSlider.on('update', function(values, handle) {
+slider.noUiSlider.on(\'update\', function(values, handle) {
   minAge.value = values[0];
   maxAge.value = values[1];
-});
-JS;
+});';
     }
 
     public function getJSFiles()
