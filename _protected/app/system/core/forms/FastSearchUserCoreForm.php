@@ -10,12 +10,11 @@
 
 namespace PH7;
 
+use PFBC\Element\AgeRange;
 use PFBC\Element\Button;
 use PFBC\Element\Checkbox;
 use PFBC\Element\Hidden;
 use PFBC\Element\HTMLExternal;
-use PFBC\Element\AgeRange;
-use PFBC\Element\Select;
 use PFBC\Element\Textbox;
 use PFBC\View\Horizontal;
 use PH7\Framework\Geo\Ip\Geo;
@@ -55,19 +54,17 @@ class FastSearchUserCoreForm
         );
         $oForm->addElement(new Hidden('submit_search', 'form_search'));
         $oForm->addElement(
-            new Select(
-                t('I am a:'),
-                SearchQueryCore::MATCH_SEX,
-                [
-                    GenderTypeUserCore::MALE => t('Man'),
-                    GenderTypeUserCore::FEMALE => t('Woman')
-                ],
-                self::$aSexOption
+            new AgeRange(
+                t('Age Range'),
+                self::$aAgeOption
             )
         );
         $oForm->addElement(
+            new Hidden(SearchQueryCore::MATCH_SEX, self::$aSexOption)
+        );
+        $oForm->addElement(
             new Checkbox(
-                t('Looking for a:'),
+                t('Looking for:'),
                 SearchQueryCore::SEX,
                 [
                     GenderTypeUserCore::FEMALE => t('Woman'),
@@ -76,17 +73,8 @@ class FastSearchUserCoreForm
                 self::$aMatchSexOption
             )
         );
-        $oForm->addElement(
-            new AgeRange(
-                t('Age Range'),
-                self::$aAgeOption
-            )
-        );
-        //$oForm->addElement(new Hidden(SearchQueryCore::COUNTRY, 'fr'));
         $oForm->addElement(new Textbox(t('City:'), SearchQueryCore::CITY, self::$aCityOption));
-        $oForm->addElement(new Checkbox('', SearchQueryCore::ORDER, [SearchCoreModel::LATEST => '<span class="bold">' . t('Newest') . '</span>'], self::$aLatestOrder));
-        $oForm->addElement(new Checkbox('', SearchQueryCore::AVATAR, ['1' => '<span class="bold">' . t('With photo') . '</span>'], self::$aAvatarOnly));
-        $oForm->addElement(new Checkbox('', SearchQueryCore::ONLINE, ['1' => '<span class="bold green">' . t('Online') . '</span>'], self::$aOnlineOnly));
+        //$oForm->addElement(new Hidden(SearchQueryCore::COUNTRY, 'fr'));
         $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();

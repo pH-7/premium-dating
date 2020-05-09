@@ -11,6 +11,7 @@
 namespace PH7;
 
 use PFBC\Element\Age;
+use PFBC\Element\AgeRange;
 use PFBC\Element\Button;
 use PFBC\Element\Checkbox;
 use PFBC\Element\Email;
@@ -90,8 +91,8 @@ class SearchUserCoreForm
             )
         );
         $oForm->addElement(
-            new Age(
-                t('Age Range:'),
+            new AgeRange(
+                t('Age Range'),
                 self::$aAgeOption
             )
         );
@@ -211,8 +212,8 @@ class SearchUserCoreForm
             )
         );
         $oForm->addElement(
-            new Age(
-                t('Age Range:'),
+            new AgeRange(
+                t('Age Range'),
                 self::$aAgeOption
             )
         );
