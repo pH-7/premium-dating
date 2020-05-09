@@ -6,11 +6,26 @@
 namespace PFBC\Element;
 
 use PFBC\OptionElement;
+use PH7\Framework\Mvc\Model\DbConfig;
 
 class AgeRange extends OptionElement
 {
+    const MIN_AGE_TYPE = 'min_age';
+    const MAX_AGE_TYPE = 'max_age';
+
     /** @var string */
     private $sRangeInputIdName;
+
+    /**
+     * Generate the select field for age search.
+     *
+     * @param string $sLabel
+     * @param array|null $aProperties
+     */
+    public function __construct($sLabel, array $aProperties = null)
+    {
+        parent::__construct($sLabel, '', [], $aProperties);
+    }
 
     public function render()
     {
@@ -18,22 +33,26 @@ class AgeRange extends OptionElement
         $this->sRangeInputIdName = $this->getRangeInputName();
         parent::render();
 
+        echo '<input type="hidden" name="min-age" value="' . $this->minAgeDefaultValue() . '" id="min-age-input" />';
+        echo '<input type="hidden" name="max-age" value="' . $this->maxAgeDefaultValue() . '" id="max-age-input" />';
         echo '<div id="' . $this->sRangeInputIdName . '"></div>';
     }
 
 
     public function renderJS()
     {
-        echo 'var slider = document.getElementById("' . $this->sRangeInputIdName . '");';
+        echo 'let slider = document.getElementById("' . $this->sRangeInputIdName . '");';
+        echo 'let minAge = document.getElementById("min-age-input");';
+        echo 'let maxAge = document.getElementById("max-age-input");';
 
         echo <<<JS
 noUiSlider.create(slider, {
-    start: [20, 80],
+    start: [20, 60],
     keyboardSupport: true,
     tooltips: [true, true],
     range: {
         'min': 18,
-        'max': 99
+        'max': 90
     },
     format: {
     from: function(value) {
@@ -43,6 +62,11 @@ noUiSlider.create(slider, {
             return parseInt(value);
         }
     }
+});
+
+slider.noUiSlider.on('update', function(values, handle) {
+  minAge.value = values[0];
+  maxAge.value = values[1];
 });
 JS;
     }
@@ -68,5 +92,21 @@ JS;
     private function getRangeInputName()
     {
         return 'rangeInput' . mt_rand(1, 10);
+    }
+
+    /**
+     * @return int
+     */
+    private function minAgeDefaultValue()
+    {
+        return !empty($this->attributes['value'][static::MIN_AGE_TYPE]) ? $this->attributes['value'][static::MIN_AGE_TYPE] : '';
+    }
+
+    /**
+     * @return int
+     */
+    private function maxAgeDefaultValue()
+    {
+        return !empty($this->attributes['value'][static::MAX_AGE_TYPE]) ? $this->attributes['value'][static::MAX_AGE_TYPE] : '';
     }
 }
