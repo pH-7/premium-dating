@@ -13,6 +13,12 @@ class AgeRange extends OptionElement
     const MIN_AGE_TYPE = 'min_age';
     const MAX_AGE_TYPE = 'max_age';
 
+    /** @var int */
+    private $iMinAge;
+
+    /** @var int */
+    private $iMaxAge;
+
     /** @var string */
     private $sRangeInputIdName;
 
@@ -25,6 +31,9 @@ class AgeRange extends OptionElement
     public function __construct($sLabel, array $aProperties = null)
     {
         parent::__construct($sLabel, '', [], $aProperties);
+
+        $this->iMinAge = (int)DbConfig::getSetting('minAgeRegistration');
+        $this->iMaxAge = (int)DbConfig::getSetting('maxAgeRegistration');
     }
 
     public function render()
@@ -33,8 +42,8 @@ class AgeRange extends OptionElement
         $this->sRangeInputIdName = $this->getRangeInputName();
         parent::render();
 
-        echo '<input type="hidden" name="min-age" value="' . $this->minAgeDefaultValue() . '" id="min-age-input" />';
-        echo '<input type="hidden" name="max-age" value="' . $this->maxAgeDefaultValue() . '" id="max-age-input" />';
+        echo '<input type="hidden" name="age1" value="' . $this->minAgeDefaultValue() . '" id="min-age-input" />';
+        echo '<input type="hidden" name="age2" value="' . $this->maxAgeDefaultValue() . '" id="max-age-input" />';
         echo '<div id="' . $this->sRangeInputIdName . '"></div>';
     }
 
@@ -99,7 +108,7 @@ JS;
      */
     private function minAgeDefaultValue()
     {
-        return !empty($this->attributes['value'][static::MIN_AGE_TYPE]) ? $this->attributes['value'][static::MIN_AGE_TYPE] : '';
+        return !empty($this->attributes['value'][static::MIN_AGE_TYPE]) ? $this->attributes['value'][static::MIN_AGE_TYPE] : $this->iMinAge;
     }
 
     /**
@@ -107,6 +116,6 @@ JS;
      */
     private function maxAgeDefaultValue()
     {
-        return !empty($this->attributes['value'][static::MAX_AGE_TYPE]) ? $this->attributes['value'][static::MAX_AGE_TYPE] : '';
+        return !empty($this->attributes['value'][static::MAX_AGE_TYPE]) ? $this->attributes['value'][static::MAX_AGE_TYPE] : $this->iMaxAge;
     }
 }
