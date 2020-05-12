@@ -43,7 +43,7 @@ class AgeRange extends OptionElement
     {
         echo '<input type="hidden" name="age1" value="' . $this->minAgeDefaultValue() . '" id="min-age-input" />';
         echo '<input type="hidden" name="age2" value="' . $this->maxAgeDefaultValue() . '" id="max-age-input" />';
-        echo '<div id="' . $this->sRangeInputIdName . '" style="width:200px;display:inline-block"></div>';
+        echo '<div id="' . $this->sRangeInputIdName . '" style="width:15rem;margin-left:1.8rem;display:inline-block"></div>';
     }
 
 
