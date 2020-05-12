@@ -20,6 +20,10 @@
     background-image: url(../img/bg_box.png);
 }
 
+.search-block, .design-box {
+    width: 100%;
+}
+
 .design-box h2 {
     text-align: center;
     text-shadow: #666 0 -1px 0;

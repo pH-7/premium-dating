@@ -10,13 +10,15 @@
             {{ $country_name = t($user->country) }}
             {{ $age = UserBirthDateCore::getAgeFromBirthDate($user->birthDate) }}
 
-            <div class="col-sm-4 col-md-3 col-lg-3 thumb_photo">
-                {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, 100) }}
-                <p class="cy_ico">
-                    <a href="{% (new UserCore)->getProfileLink($user->username) %}">
-                        <strong>{% $str->extract($user->username, PH7_MAX_USERNAME_LENGTH_SHOWN) %}</strong>
-                    </a> <img src="{{ $design->getSmallFlagIcon($user->country) }}" alt="{country_name}" title="{lang 'From %0%', $country_name}" />
-                </p>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 thumb_photo">
+                <figure>
+                    {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, 100) }}
+                    <figcaption class="cy_ico">
+                        <a href="{% (new UserCore)->getProfileLink($user->username) %}">
+                            <strong>{% $str->extract($user->username, PH7_MAX_USERNAME_LENGTH_SHOWN) %}</strong>
+                        </a> <img src="{{ $design->getSmallFlagIcon($user->country) }}" alt="{country_name}" title="{lang 'From %0%', $country_name}" />
+                    </figcaption>
+                </figure>
 
                 {if $is_admin_auth}
                     <p class="small">
