@@ -55,7 +55,6 @@ class FastSearchUserCoreForm
         $oForm->addElement(new Hidden('submit_search', 'form_search'));
         $oForm->addElement(
             new AgeRange(
-                t('Age Range'),
                 self::$aAgeOption
             )
         );

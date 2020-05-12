@@ -92,7 +92,6 @@ class SearchUserCoreForm
         );
         $oForm->addElement(
             new AgeRange(
-                t('Age Range'),
                 self::$aAgeOption
             )
         );
@@ -213,7 +212,6 @@ class SearchUserCoreForm
         );
         $oForm->addElement(
             new AgeRange(
-                t('Age Range'),
                 self::$aAgeOption
             )
         );
