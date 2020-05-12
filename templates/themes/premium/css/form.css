@@ -170,3 +170,18 @@ form input[type=image] {
 .btn input:hover {
     text-decoration: none !important;
 }
+
+.pfbc-element {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+
+}
+
+.pfbc-label {
+    padding-top: 0 !important;
+}
+
+/* Remove padding from checkboxes */
+.pfbc-checkbox {
+    padding: 0 !important;
+}
