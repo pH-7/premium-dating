@@ -30,7 +30,7 @@ class AgeRange extends OptionElement
      */
     public function __construct($sLabel, array $aProperties = null)
     {
-        parent::__construct('', '', [], $aProperties);
+        parent::__construct($sLabel, '', [], $aProperties);
 
         // Set unique output/input ID name to prevent problems if the "range" field is used more than once on the same page
         $this->sRangeInputIdName = $this->getRangeInputName();
@@ -43,7 +43,7 @@ class AgeRange extends OptionElement
     {
         echo '<input type="hidden" name="age1" value="' . $this->minAgeDefaultValue() . '" id="min-age-input" />';
         echo '<input type="hidden" name="age2" value="' . $this->maxAgeDefaultValue() . '" id="max-age-input" />';
-        echo '<div id="' . $this->sRangeInputIdName . '" style="width:200px;display:flex"></div>';
+        echo '<div id="' . $this->sRangeInputIdName . '" style="width:200px;display:inline-block"></div>';
     }
 
 
