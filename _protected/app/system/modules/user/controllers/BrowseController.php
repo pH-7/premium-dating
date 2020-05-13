@@ -56,6 +56,8 @@ class BrowseController extends Controller
                 Design::WARNING_TYPE
             );
         } else {
+            $this->addCssFile();
+
             /**
              * @internal Here, we can put HTML tags in the <title> tag since the template will remove them before the output.
              */
@@ -65,7 +67,16 @@ class BrowseController extends Controller
             $this->view->meta_description = t('Meet new People and Friends near you with %site_name% - Browse Members');
             $this->view->avatarDesign = new AvatarDesignCore;
             $this->view->users = $oUsers;
+
             $this->output();
         }
+    }
+
+    private function addCssFile()
+    {
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'form.css'
+        );
     }
 }

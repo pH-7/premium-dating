@@ -1,0 +1,22 @@
+/*
+ * Author:        Pierre-Henry Soria <hello@ph7cms.com>
+ * Copyright:     (c) 2020, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+
+.pfbc-element {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+}
+
+/* Remove padding from checkboxes */
+.pfbc-checkbox {
+    padding: 0 !important;
+}
+
+label.age-range {
+    float: left;
+    font-weight: bold;
+    margin-right: .25em;
+}
