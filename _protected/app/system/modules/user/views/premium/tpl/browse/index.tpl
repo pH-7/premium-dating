@@ -12,7 +12,7 @@
 
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 thumb_photo">
                 <figure>
-                    {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, 100) }}
+                    {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, 150) }}
                     <figcaption class="cy_ico">
                         <a href="{% (new UserCore)->getProfileLink($user->username) %}">
                             <strong>{% $str->extract($user->username, PH7_MAX_USERNAME_LENGTH_SHOWN) %}</strong>
