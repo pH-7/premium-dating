@@ -63,7 +63,7 @@ class FastSearchUserCoreForm
         );
         $oForm->addElement(
             new Checkbox(
-                t('Looking for:'),
+                t('Looking for'),
                 SearchQueryCore::SEX,
                 [
                     GenderTypeUserCore::FEMALE => t('Woman'),
@@ -72,7 +72,7 @@ class FastSearchUserCoreForm
                 self::$aMatchSexOption
             )
         );
-        $oForm->addElement(new Textbox(t('City:'), SearchQueryCore::CITY, self::$aCityOption));
+        $oForm->addElement(new Textbox(t('City'), SearchQueryCore::CITY, self::$aCityOption));
         //$oForm->addElement(new Hidden(SearchQueryCore::COUNTRY, 'fr'));
         $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
