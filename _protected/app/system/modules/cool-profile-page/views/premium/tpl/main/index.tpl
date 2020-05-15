@@ -1,9 +1,9 @@
+<div class="col-xs-12">
+    {manual_include 'cover_photo.inc.tpl'}
+</div>
+
 <div class="col-md-11 col-sm-11 col-xs-12 col-md-offset-1 col-sm-offset-1" itemscope="itemscope"
      itemtype="http://schema.org/Person">
-
-    <div class="col-xs-10 col-xs-offset-1">
-        {manual_include 'cover_photo.inc.tpl'}
-    </div>
 
     <div class="row">
         <div class="col-md-4 col-sm-3 col-xs-12">
