@@ -27,10 +27,12 @@
         {/each}
         {main_include 'page_nav.inc.tpl'}
     {else}
-        <p>{error}</p>
+        <p class="italic bold">{error}</p>
     {/if}
 
     {if $is_add_album_btn_shown}
+        <p>&nbsp;</p>
+
         <p class="bottom">
             <a class="btn btn-default btn-md" href="{{ $design->url('picture', 'main', 'addalbum') }}">
                 {lang 'Add a new album'}
