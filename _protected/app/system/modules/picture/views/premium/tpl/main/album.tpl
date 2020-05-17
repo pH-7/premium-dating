@@ -32,5 +32,5 @@
         </p>
     {/if}
 {else}
-  <p>{error}</p>
+  <p class="italic bold">{error}</p>
 {/if}
