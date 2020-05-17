@@ -41,9 +41,9 @@
        <meta name="apple-mobile-web-app-capable" content="yes">
        <meta name="apple-mobile-web-app-title" content="{site_name}">
        <meta name="msapplication-TileColor" content="#ffffff">
-       <meta name="msapplication-TileImage" content="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}ms-icon-144x144.png">  
+       <meta name="msapplication-TileImage" content="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}ms-icon-144x144.png">
     {/if}
-    
+
     <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
     <!-- Do not modify or remove this code! Think of those who spend a lot of time to develop this CMS & Framework for you -->
     <meta name="creator" content="pH7CMS, Pierre-Henry Soria - {software_url}" />
