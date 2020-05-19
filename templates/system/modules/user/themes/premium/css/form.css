@@ -15,6 +15,10 @@
     padding: 0 !important;
 }
 
+.age-range-block {
+    padding-top: 10px;
+}
+
 label.age-range {
     float: left;
     font-weight: bold;
