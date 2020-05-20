@@ -6,7 +6,7 @@
      itemtype="http://schema.org/Person">
 
     <div class="row">
-        <div class="col-md-4 col-sm-3 col-xs-12">
+        <div class="col-md-4 col-sm-3 col-xs-12 animated fadeInLeftBig">
             {if !empty($punchline)}
                 <div class="row">
                     <div class="card shadow">
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <div class="col-md-8 col-sm-9 col-xs-12">
+        <div class="col-md-8 col-sm-9 col-xs-12 animated fadeInRightBig">
             <div class="row">
                 <div class="card shadow center">
                     <h2>{lang 'Information'}</h2>
@@ -194,7 +194,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12 animated fadeInUp">
             {if $is_map_enabled}
                 <div class="row">
                     <div class="card shadow s_bMarg">
