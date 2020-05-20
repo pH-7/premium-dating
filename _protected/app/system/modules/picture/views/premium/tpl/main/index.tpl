@@ -19,7 +19,9 @@
         <p>&nbsp;</p>
     {/if}
 
-    <p class="bottom">
-        <a class="btn btn-default btn-md" href="{{ $design->url('picture', 'main', 'addalbum') }}">{lang 'Add a new album'}</a>
+    <p class="bottom s_tMarg">
+        <a class="btn btn-default btn-md" href="{{ $design->url('picture', 'main', 'addalbum') }}">
+            {lang 'Add a new album'}
+        </a>
     </p>
 </div>

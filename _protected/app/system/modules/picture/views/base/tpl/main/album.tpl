@@ -27,8 +27,11 @@
     {main_include 'page_nav.inc.tpl'}
 
     {if $is_user_auth AND $member_id == $a->profileId}
+        <hr />
         <p class="center bottom">
-            <a class="btn btn-default btn-md" href="{{ $design->url('picture', 'main', 'addphoto', $a->albumId) }}">{lang 'Add new pictures'}</a>
+            <a class="btn btn-default btn-md" href="{{ $design->url('picture', 'main', 'addphoto', $a->albumId) }}">
+                {lang 'Add new pictures'}
+            </a>
         </p>
     {/if}
 {else}
