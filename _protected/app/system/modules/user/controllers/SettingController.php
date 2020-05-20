@@ -88,7 +88,7 @@ class SettingController extends Controller
 
     public function design()
     {
-        $this->setTitle(t('Profile Wallpaper'));
+        $this->setTitle(t('Cover Photo'));
 
         if ($this->httpRequest->postExists('del')) {
             $this->removeWallpaper();
@@ -191,7 +191,7 @@ class SettingController extends Controller
 
         Header::redirect(
             null,
-            t('Your wallpaper has been successfully deleted!')
+            t('Your cover photo has been successfully deleted!')
         );
     }
 

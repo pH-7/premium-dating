@@ -17,8 +17,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ $design->url('user','setting','design') }}" title="{lang 'My Wallpaper'}">
-                        <i class="fa fa-picture-o"></i> {lang 'Design Profile'}
+                    <a href="{{ $design->url('user','setting','design') }}" title="{lang 'My Cover Image'}">
+                        <i class="fa fa-picture-o"></i> {lang 'Cover Photo'}
                     </a>
                 </li>
                 <li>
