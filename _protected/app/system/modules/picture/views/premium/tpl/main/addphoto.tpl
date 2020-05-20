@@ -1,4 +1,4 @@
-<div class="pull-left col-xs-6">
+<div class="pull-left col-xs-6 animated fadeInDownBig">
     {{ PictureForm::display() }}
 </div>
 
