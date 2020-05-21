@@ -1,4 +1,4 @@
-<div class="col-xs-10" id="picture_block">
+<div class="col-xs-12 col-sm-10" id="picture_block">
     {if empty($error)}
         {each $album in $albums}
             {{ $absolute_url = Framework\Mvc\Router\Uri::get('picture','main','album',"$album->username,$album->name,$album->albumId") }}
