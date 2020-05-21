@@ -16,7 +16,7 @@
                     <figcaption class="cy_ico">
                         <a href="{% (new UserCore)->getProfileLink($user->username) %}">
                             <strong>{% $str->extract($user->username, PH7_MAX_USERNAME_LENGTH_SHOWN) %}</strong>
-                        </a> <img src="{{ $design->getSmallFlagIcon($user->country) }}" alt="{country_name}" title="{lang 'From %0%', $country_name}" />
+                        </a> <img src="{{ $design->getSmallFlagIcon($user->country) }}" alt="{country_name}" title="{lang 'From %0%', $country_name}" /> • {if $is_mail_enabled}<a class="italic" href="{{ $design->url('mail','main','compose',$user->username) }}" rel="nofollow">{lang 'Message'}</a>{/if}
                     </figcaption>
                 </figure>
 
