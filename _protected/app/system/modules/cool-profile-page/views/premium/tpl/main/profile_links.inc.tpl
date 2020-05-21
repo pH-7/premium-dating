@@ -1,13 +1,13 @@
 <h2>{lang "Let's Speak"}</h2>
 
 <div class="row">
-    {if $is_im_enabled AND !$is_own_profile}
+    {if $is_im_enabled}
         <a class="vs_marg" rel="nofollow" href="{messenger_link}" title="{lang 'Chat'}">
             <i class="fa fa-comment-o chat"></i>
         </a>
     {/if}
 
-    {if $is_lovecalculator_enabled AND !$is_own_profile}
+    {if $is_lovecalculator_enabled}
         <a class="vs_marg" href="{{ $design->url('love-calculator','main','index',$username) }}" title="{lang 'Match'}">
             <i class="fa fa-heart-o heart"></i>
         </a>
@@ -15,13 +15,13 @@
 </div>
 
 <div class="row">
-    {if $is_mail_enabled AND !$is_own_profile}
+    {if $is_mail_enabled}
         <a class="vs_marg" rel="nofollow" href="{mail_link}" title="{lang 'Send Message'}">
             <li class="fa fa-envelope-o message"></li>
         </a>
     {/if}
 
-    {if $is_friend_enabled AND !$is_own_profile}
+    {if $is_friend_enabled}
         <a class="vs_marg" rel="nofollow" href="{friend_link}">
             {if $is_approved_friend}
                 <i class="fa fa-user-times friend"></i>
