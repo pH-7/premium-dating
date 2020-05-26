@@ -92,6 +92,32 @@ class Security
     }
 
     /**
+     * Set User Log Session.
+     *
+     * @param int $iProfileId
+     * @param string $sEmail
+     * @param string $sFirstName
+     * @param string $sTable
+     *
+     * @return void
+     */
+    public function addSessionLog($iProfileId, $sEmail, $sFirstName, $sTable = DbTableName::MEMBER)
+    {
+        Various::checkModelTable($sTable);
+
+        $rStmt = Db::getInstance()->prepare(
+            'INSERT INTO' . Db::prefix($sTable . '_log_sess') . '(profileId, email, firstName, ip)
+            VALUES (:profileId, :email, :firstName, :ip)'
+        );
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':email', $sEmail, PDO::PARAM_STR);
+        $rStmt->bindValue(':firstName', $sFirstName, PDO::PARAM_STR);
+        $rStmt->bindValue(':ip', $this->sIp, PDO::PARAM_STR);
+        $rStmt->execute();
+        Db::free($rStmt);
+    }
+
+    /**
      * Blocking access to the login page after exceeded login attempts.
      *
      * @param int $iMaxAttempts
@@ -117,18 +143,20 @@ class Security
         $rStmt->execute();
 
         if ($rStmt->rowCount() == 1) {
-            $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
+            $oAttemptRow = $rStmt->fetch(PDO::FETCH_OBJ);
 
-            if ($oRow->attempts >= $iMaxAttempts) {
-                $sLockoutTime = (new DateTime($oRow->lastLogin))->add(DateInterval::createFromDateString("$iAttemptTime minutes"))->format('Y-m-d H:i:s');
+            if ($oAttemptRow->attempts >= $iMaxAttempts) {
+                $sLockoutTime = (new DateTime($oAttemptRow->lastLogin))->add(
+                    DateInterval::createFromDateString("$iAttemptTime minutes")
+                )->format('Y-m-d H:i:s');
 
-                if ($sLockoutTime > $this->sCurrentTime) {
+                if ($this->sCurrentTime <= $sLockoutTime) {
                     /**
                      * Send email to prevent that someone tries to hack their member account.
-                     * We test that the number of attempts equals the number of maximim tantatives to avoid duplication of sending emails.
+                     * We test that the number of attempts equals the number of maximum attempts to avoid sending several same emails.
                      */
-                    if ($oRow->attempts == $iMaxAttempts) {
-                        (new SecurityCore)->sendAlertLoginAttemptsExceeded(
+                    if ($oAttemptRow->attempts == $iMaxAttempts) {
+                        (new SecurityCore)->sendLoginAttemptsExceededAlert(
                             $iMaxAttempts,
                             $iAttemptTime,
                             $this->sIp,

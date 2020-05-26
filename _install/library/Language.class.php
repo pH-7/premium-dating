@@ -22,7 +22,7 @@ class Language
 
     public function __construct()
     {
-        if ($this->doesUserLangExists()) {
+        if ($this->doesUserLangExist()) {
             setcookie(
                 Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang',
                 $_GET['l'],
@@ -33,9 +33,9 @@ class Language
                 true
             );
             $this->sLang = $_GET['l'];
-        } elseif ($this->doesCookieLangExists()) {
+        } elseif ($this->doesCookieLangExist()) {
             $this->sLang = $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'];
-        } elseif ($this->doesBrowserLangExists()) {
+        } elseif ($this->doesBrowserLangExist()) {
             $this->sLang = $this->getBrowser();
         } else {
             $this->sLang = Controller::DEFAULT_LANG;
@@ -45,11 +45,15 @@ class Language
     /**
      * Get the language of the client browser.
      *
-     * @return string First two letters of the languages ​​of the client browser.
+     * @return string|null First two letters of the languages of the client browser.
      */
     public function getBrowser()
     {
-        $sLang = explode(',', @$_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        if (empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            return null;
+        }
+
+        $sLang = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
         return htmlspecialchars(
             strtolower(
@@ -76,7 +80,7 @@ class Language
     /**
      * @return bool
      */
-    private function doesUserLangExists()
+    private function doesUserLangExist()
     {
         return !empty($_GET['l']) && is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_GET['l'] . PH7_DS . self::LANG_FILENAME);
     }
@@ -84,7 +88,7 @@ class Language
     /**
      * @return bool
      */
-    private function doesCookieLangExists()
+    private function doesCookieLangExist()
     {
         return isset($_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang']) &&
             is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'] . PH7_DS . self::LANG_FILENAME);
@@ -93,7 +97,7 @@ class Language
     /**
      * @return bool
      */
-    private function doesBrowserLangExists()
+    private function doesBrowserLangExist()
     {
         return is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $this->getBrowser() . PH7_DS . self::LANG_FILENAME);
     }

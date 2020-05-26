@@ -153,7 +153,7 @@ final class FrontController
                 // Get module, from the `routes/<LANG_CODE>.xml` file
                 $this->oRegistry->module = $oRoute->getAttribute('module');
 
-                // Check if file exist
+                // Check if config module file exists
                 if (!$this->oConfig->load(PH7_PATH_APP . $sModulePath . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
                     $this->notFound('The <b>' . $this->oRegistry->module .
                         '</b> system module is not found.<br />File: <b>' . PH7_PATH_APP . $sModulePath . $this->oRegistry->module . PH7_DS .
@@ -216,7 +216,7 @@ final class FrontController
         $this->oRegistry->url_module = PH7_URL_ROOT . $this->oRegistry->module . PH7_SH;
 
         /***** PATH THE TEMPLATE *****/
-        $this->oRegistry->path_themes_module = PH7_PATH_TPL_SYS_MOD . PH7_DS . $this->oRegistry->module . PH7_DS . PH7_TPL;
+        $this->oRegistry->path_themes_module = PH7_PATH_TPL_SYS_MOD . $this->oRegistry->module . PH7_DS . PH7_TPL;
 
         /***** URL THE TEMPLATE *****/
         $this->oRegistry->url_themes_module = PH7_URL_TPL_SYS_MOD . $this->oRegistry->module . PH7_SH . PH7_TPL;
@@ -260,7 +260,7 @@ final class FrontController
             $this->oRegistry->module = $this->oUri->fragment(1);
         }
 
-        // Check if file exist
+        // Check if config module file exists
         if (!$this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->notFound('The <b>' . $this->oRegistry->module . '</b> module is not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS .
                 '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file is not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
@@ -349,7 +349,7 @@ final class FrontController
                 ->setDefaultLang(PH7_PREF_LANG)
                 ->init()
                 ->load(self::MAIN_GETTEXT_FILENAME, PH7_PATH_APP_LANG)
-                ->getLang();
+                ->getLocaleName();
 
             define('PH7_LANG_NAME', $sLangName);
         }

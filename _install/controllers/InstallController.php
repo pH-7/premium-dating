@@ -3,7 +3,7 @@
  * @title            InstallController Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Controller
  */
@@ -84,12 +84,14 @@ class InstallController extends Controller
      * Enable/Disable Site Settings according to the chosen niche
      */
     const SOCIAL_SETTINGS = [
+        'navbarType' => 'default',
         'socialMediaWidgets' => '1',
         'requireRegistrationAvatar' => '0',
         'isUserAgeRangeField' => '0'
     ];
 
     const DATING_SETTINGS = [
+        'navbarType' => 'inverse',
         'socialMediaWidgets' => '0',
         'requireRegistrationAvatar' => '1',
         'isUserAgeRangeField' => '1'
@@ -170,8 +172,11 @@ class InstallController extends Controller
         }
 
         $this->oView->assign('sept_number', 3);
-        $this->oView->assign('errors', @$aErrors);
-        unset($aErrors);
+
+        if (!empty($aErrors) && is_array($aErrors)) {
+            $this->oView->assign('errors', $aErrors);
+        }
+
         $this->oView->display('config_path.tpl');
     }
 
@@ -292,8 +297,10 @@ class InstallController extends Controller
         $this->oView->assign('def_db_charset', DbDefaultConfig::CHARSET);
 
         $this->oView->assign('sept_number', 4);
-        $this->oView->assign('errors', @$aErrors);
-        unset($aErrors);
+
+        if (!empty($aErrors) && is_array($aErrors)) {
+            $this->oView->assign('errors', $aErrors);
+        }
 
         $this->oView->display('config_system.tpl');
     }
@@ -433,8 +440,11 @@ class InstallController extends Controller
         $this->oView->assign('def_site_name', self::DEFAULT_SITE_NAME);
         $this->oView->assign('def_admin_username', self::DEFAULT_ADMIN_USERNAME);
         $this->oView->assign('sept_number', 5);
-        $this->oView->assign('errors', @$aErrors);
-        unset($aErrors);
+
+        if (!empty($aErrors) && is_array($aErrors)) {
+            $this->oView->assign('errors', $aErrors);
+        }
+
         $this->oView->display('config_site.tpl');
     }
 
@@ -498,8 +508,11 @@ class InstallController extends Controller
         }
 
         $this->oView->assign('sept_number', 6);
-        $this->oView->assign('errors', @$aErrors);
-        unset($aErrors);
+
+        if (!empty($aErrors) && is_array($aErrors)) {
+            $this->oView->assign('errors', $aErrors);
+        }
+
         $this->oView->display('niche.tpl');
     }
 

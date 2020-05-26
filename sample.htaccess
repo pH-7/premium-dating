@@ -23,11 +23,6 @@
     # RewriteBase /
 </IfModule>
 
-<IfModule mod_php5.c>
-    php_flag allow_url_include Off
-    php_flag expose_php Off
-</IfModule>
-
 
 ### Security and Spam ###
 
@@ -68,8 +63,8 @@ ServerSignature Off
     </IfModule>
 </FilesMatch>
 
-# Deny access for "composer.json" and "sample.htaccess" (since they won't be removed after packaging by _tools/deployment.sh)
-<FilesMatch "composer\.json|sample\.htaccess">
+# Deny access to composer.json, error_log and sample.htaccess files
+<FilesMatch "composer\.json|sample\.htaccess|error_log">
     # Apache 2.4+
     <IfModule mod_authz_core.c>
         Require all denied

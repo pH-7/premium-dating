@@ -1,4 +1,4 @@
-<div class="right col-md-4 animated fadeInRight">
+<div class="right col-lg-4 col-md-4 col-sm-5 col-xs-10 animated fadeInRight">
     <h1 class="red3 italic underline">{headline}</h1>
     <div class="center">
         <a href="{{ $design->url('user','main','login') }}" class="btn btn-primary btn-lg">
@@ -13,8 +13,8 @@
     </div>
 </div>
 
-<div class="left col-md-8">
-    <div class="folio_block">
+<div class="left col-lg-7 col-md-8 col-sm-7 col-xs-12">
+    <div class="folio_block animated fadeInDown">
         <h1 class="red3 italic underline">{slogan}</h1>
 
         <div class="splash_slideshow">
@@ -43,6 +43,8 @@
     </div>
 
     {if $is_users_block}
-        <div class="carousel">{{ $userDesignModel->carouselProfiles() }}</div>
+        <div class="carousel animated fadeInLeft">
+            {{ $userDesignModel->carouselProfiles() }}
+        </div>
     {/if}
 </div>

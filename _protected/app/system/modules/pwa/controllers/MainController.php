@@ -12,31 +12,30 @@ use PH7\Framework\Http\Http;
 
 class MainController extends Controller
 {
-    const CONTENT_TYPE = 'application/json';
+    const JSON_CONTENT_TYPE = 'application/json';
     const JSON_TPL_EXT = '.json.tpl';
-    const CONTENT_TYPE_XML = 'application/xml';
+    const XML_CONTENT_TYPE = 'application/xml';
     const XML_TPL_EXT = '.xml.tpl';
     const STATIC_CACHE_LIFETIME = 86400; // 86400 secs = 24 hours
 
     public function manifest()
     {
-        $this->setContentType();
         $this->enableStaticTplCache();
 
-        $this->view->bg_color = $this->config->values['module.setting']['background_color'];
+        $this->view->hex_bg_color = $this->config->values['module.setting']['hex.background_color'];
         $this->view->orientation = $this->config->values['module.setting']['orientation_mode'];
 
         $this->jsonOutput();
     }
-    
-    // Add XML browserconfig
-    public function browserConfig() 
-    { 
-        $this->setContentType(); 
-        $this->enableStaticTplCache(); 
-     
-        $this->xmlOutput(); 
-    } 
+
+    public function browserConfig()
+    {
+        $this->enableStaticTplCache();
+
+        $this->view->hex_title_color = $this->config->values['module.setting']['hex.title_color'];
+
+        $this->xmlOutput();
+    }
 
     /**
      * @return void
@@ -50,11 +49,11 @@ class MainController extends Controller
         $this->view->setHtmlCompress(false);
         $this->view->setPhpCompress(false);
 
-        $this->setContentType();
+        $this->setJsonContentType();
 
         $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::JSON_TPL_EXT);
     }
-    
+
     /**
      * @return void
      *
@@ -67,11 +66,11 @@ class MainController extends Controller
         $this->view->setHtmlCompress(false);
         $this->view->setPhpCompress(false);
 
-        $this->setContentTypeXml();
+        $this->setXmlContentType();
 
         $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::XML_TPL_EXT);
     }
-    
+
     private function enableStaticTplCache()
     {
         $this->view->setCaching(true);
@@ -79,26 +78,26 @@ class MainController extends Controller
     }
 
     /**
-     * Set the appropriate header output format.
+     * Set the appropriate header output for JSON format.
      *
      * @return void
      *
      * @throws Framework\Http\Exception
      */
-    private function setContentType()
+    private function setJsonContentType()
     {
-        Http::setContentType(self::CONTENT_TYPE);
+        Http::setContentType(self::JSON_CONTENT_TYPE);
     }
-    
+
     /**
-     * Set the appropriate header output format.
+     * Set the appropriate header output for XML format.
      *
      * @return void
      *
      * @throws Framework\Http\Exception
      */
-    private function setContentTypeXml()
+    private function setXmlContentType()
     {
-        Http::setContentType(self::CONTENT_TYPE_XML);
+        Http::setContentType(self::XML_CONTENT_TYPE);
     }
 }

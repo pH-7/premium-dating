@@ -15,6 +15,7 @@ use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
+use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 
@@ -187,6 +188,22 @@ class UserController extends Controller
             }
 
             $this->manualTplInclude('browse.tpl');
+            $this->output();
+        }
+    }
+
+    public function password($sUserEmail = null)
+    {
+        if (!empty($sUserEmail) && !(new Validate)->email($sUserEmail)) {
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+                t("The URL isn't valid. It doesn't contain the user's email as a parameter."),
+                Design::ERROR_TYPE
+            );
+        } else {
+            $this->view->page_title = $this->view->h1_title = t('Update User Password');
+            $this->view->user_password = $sUserEmail;
+
             $this->output();
         }
     }

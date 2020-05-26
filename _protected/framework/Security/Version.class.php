@@ -40,9 +40,9 @@ final class Version
      * VERSION NAMES:
      *
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb" amd 15.* is ABSOLUTE™
+     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb", 15.* was ABSOLUTE™ and v16 is ACIDIC
      */
-    const KERNEL_VERSION_NAME = 'ABSOLUTE™';
+    const KERNEL_VERSION_NAME = 'ACIDIC';
 
     /**
      * VERSION NUMBERS:
@@ -50,9 +50,9 @@ final class Version
      *
      * More details: https://ph7cms.com/new-versioning-system/
      */
-    const KERNEL_VERSION = '15.4.0';
+    const KERNEL_VERSION = '16.0.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2020-03-20';
+    const KERNEL_RELEASE_DATE = '2020-05-28';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7CMS.com';
@@ -117,7 +117,7 @@ final class Version
     }
 
     /**
-     * @return array|bool
+     * @return array|bool Returns an array with the release details, or FALSE if cannot retrieve the remote info.
      */
     private static function retrieveXmlInfoFromRemoteServer()
     {
@@ -142,14 +142,12 @@ final class Version
         }
         unset($oDom);
 
-        $mData = [
+        return [
             'is_alert' => $bIsAlert,
             'name' => $sVerName,
             'version' => $sVerNumber,
             'build' => $sVerBuild
         ];
-
-        return $mData;
     }
 
     /**
@@ -159,7 +157,7 @@ final class Version
      */
     private static function isUpdateAlertEnabled(DOMElement $oInfo)
     {
-        // "Validate::bool()" returns TRUE for "1", "true", "on" and "yes", FALSE otherwise
+        // "Validate::bool()" returns TRUE for "1", "true", "on", and "yes", FALSE otherwise
         return (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
     }
 }

@@ -3,7 +3,7 @@
 -- Title:         SQL Core (base) Install File
 --
 -- Author:        Pierre-Henry Soria <hello@ph7cms.com>
--- Copyright:     (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
+-- Copyright:     (c) 2017-2020, Pierre-Henry Soria. All Rights Reserved.
 -- License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 -- Package:       PH7 / Install / Data / Sql / PostgreSQL
 --
@@ -898,68 +898,44 @@ ALTER SEQUENCE ph7_affiliates_log_login_seq RESTART WITH 1;
 
 
 CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
+  sessionId int check (sessionId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_admins_log_sess_seq'),
   profileId smallint check (profileId > 0) DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
-  password varchar(240) DEFAULT NULL,
   email varchar(120) DEFAULT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
-  sessionHash varchar(40) NOT NULL,
-  idHash char(32) NOT NULL,
-  lastActivity int check (lastActivity > 0) NOT NULL,
-  location varchar(255) DEFAULT NULL,
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
-  userAgent varchar(100) NOT NULL,
-  guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES ph7_admins(profileId),
-  KEY sessionHash (sessionHash),
-  KEY lastActivity (lastActivity)
+  PRIMARY KEY (sessionId),
+  FOREIGN KEY (profileId) REFERENCES ph7_admins(profileId)
 ) ;
 
 
 CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
+  sessionId int check (sessionId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_members_log_sess'),
   profileId int check (profileId > 0) DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
-  password varchar(120) DEFAULT NULL,
   email varchar(120) DEFAULT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
-  sessionHash varchar(40) NOT NULL,
-  idHash char(32) NOT NULL,
-  lastActivity int check (lastActivity > 0) NOT NULL,
-  location varchar(255) DEFAULT NULL,
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
-  userAgent varchar(100) NOT NULL,
-  guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId),
-  KEY sessionHash (sessionHash),
-  KEY lastActivity (lastActivity)
+  PRIMARY KEY (sessionId),
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 ) ;
 
 
 CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
+  sessionId int check (sessionId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_affiliates_log_sess'),
   profileId int check (profileId > 0) DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
-  password varchar(120) DEFAULT NULL,
   email varchar(120) DEFAULT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
-  sessionHash varchar(40) NOT NULL,
-  idHash char(32) NOT NULL,
-  lastActivity int check (lastActivity > 0) NOT NULL,
-  location varchar(255) DEFAULT NULL,
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
-  userAgent varchar(100) NOT NULL,
-  guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES ph7_affiliates(profileId),
-  KEY sessionHash (sessionHash),
-  KEY lastActivity (lastActivity)
+  PRIMARY KEY (sessionId),
+  FOREIGN KEY (profileId) REFERENCES ph7_affiliates(profileId)
 ) ;
 
 
@@ -1131,7 +1107,7 @@ ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7CMS SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.5.5', 1);
+('pH7CMS', 'SQL System Schema', '1.5.9', 1);
 
 
 CREATE SEQUENCE ph7_report_seq;
@@ -1165,6 +1141,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),
 ('defaultTemplate', 'base', '', 'design'),
+('navbarType', 'default', 'Choose between "default" or "dark"', 'design'),
 ('backgroundColor', '', 'Override background color. Leave empty to disable', 'design'),
 ('textColor', '', 'Override text color. Leave empty to disable', 'design'),
 ('heading1Color', '', 'Override H1 color. Leave empty to disable', 'design'),

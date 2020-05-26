@@ -2,11 +2,13 @@
     {main_include 'profile_background.inc.tpl'}
 {/if}
 
-<div class="row" itemscope="itemscope" itemtype="http://schema.org/Person">
-    <div class="col-xs-12 col-sm-4 col-md-3">
+<div class="col-xs-12 col-sm-12 col-md-11 col-lg-10 col-lg-offset-1">
+  <div class="row" itemscope="itemscope" itemtype="http://schema.org/Person">
+    <div class="col-xs-12 col-sm-4 col-md-3 animated fadeInLeftBig">
         {{ UserDesignCoreModel::userStatus($id) }}
         {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
-        <h3 itemprop="name"><span itemprop="name">{first_name}</span> {middle_name} <span itemprop="familyName">{last_name}</span>
+        <h3 itemprop="name">
+            <span itemprop="name">{first_name}</span> {middle_name} <span itemprop="familyName">{last_name}</span>
             {if empty($last_name) OR empty($middle_name)}
                 {* Display the username if middle or last name is empty *}
                 <span itemprop="additionalName" class="italic">({username})</span>
@@ -145,7 +147,7 @@
         {{ $design->socialMediaWidgets() }}
     </div>
 
-    <div class="col-xs-12 col-sm-6 col-md-6">
+    <div class="col-xs-12 col-sm-6 col-md-6 animated fadeInDownBig">
         {if !empty($punchline)}
             <div class="profile-section">
                 <h1 class="cinnabar-red italic center">{punchline}</h1>
@@ -186,6 +188,7 @@
         {/if}
 
         {if $is_relatedprofile_enabled}
+            <h2 class="center">{lang 'Similar Profiles'}</h2>
             <div class="profile-section">
                 <div class="content" id="related_profile">
                     <script>
@@ -219,7 +222,7 @@
         {manual_include 'interested_or_not.buttons.inc.tpl'}
     </div>
 
-    <div class="col-xs-12 col-sm-2 col-md-3">
+    <div class="col-xs-12 col-sm-2 col-md-3 animated fadeInRightBig">
         {if $is_map_enabled}
             <div class="s_bMarg">
                 <h2>{lang 'Location'}</h2>
@@ -233,4 +236,5 @@
 
         {{ CommentDesignCore::link($id, 'profile') }}
     </div>
+  </div>
 </div>

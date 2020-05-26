@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Mail / Form
  */
@@ -34,11 +34,6 @@ class MailForm
 
         $oHttpRequest = new HttpRequest; // For Reply Function
 
-        $sSubjectValue = '';
-        if ($oHttpRequest->getExists('title')) {
-            $sSubjectValue = t('RE: ') . str_replace('-', ' ', $oHttpRequest->get('title'));
-        }
-
         $oForm = new \PFBC\Form('form_compose_mail');
         $oForm->configure(['action' => '']);
         $oForm->addElement(new Hidden('submit_compose_mail', 'form_compose_mail'));
@@ -61,7 +56,8 @@ class MailForm
                 [
                     'id' => 'str_title',
                     'onblur' => 'CValid(this.value,this.id,2,60)',
-                    'value' => $sSubjectValue, 'validation' => new Str(2, 60),
+                    'value' => self::getSubjectValue($oHttpRequest),
+                    'validation' => new Str(2, 60),
                     'required' => 1
                 ]
             )
@@ -74,9 +70,9 @@ class MailForm
                 [
                     'id' => 'str_msg',
                     'onblur' => 'CValid(this.value,this.id,2,2500)',
+                    'placeholder' => t('Say something nice to %0% 😊', $oHttpRequest->get('recipient')),
                     'value' => $oHttpRequest->get('message'),
                     'validation' => new Str(2, 2500),
-                    'basic' => 1,
                     'required' => 1
                 ]
             )
@@ -101,7 +97,21 @@ class MailForm
         }
 
         $oForm->addElement(new Button(t('Send'), 'submit', ['icon' => 'mail-closed']));
-        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script><script src="' . PH7_URL_STATIC . PH7_JS . 'autocompleteUsername.js"></script>'));
+        $oForm->addElement(
+            new HTMLExternal(
+                '<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script><script src="' . PH7_URL_STATIC . PH7_JS . 'autocompleteUsername.js"></script>'
+            )
+        );
         $oForm->render();
+    }
+
+    private static function getSubjectValue(HttpRequest $oHttpRequest)
+    {
+        $sSubjectValue = '';
+        if ($oHttpRequest->getExists('title')) {
+            $sSubjectValue = t('RE: ') . str_replace('-', ' ', $oHttpRequest->get('title'));
+        }
+
+        return $sSubjectValue;
     }
 }

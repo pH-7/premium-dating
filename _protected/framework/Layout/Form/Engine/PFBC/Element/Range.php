@@ -5,6 +5,8 @@
 
 namespace PFBC\Element;
 
+use PFBC\Validation\Numeric;
+
 class Range extends Textbox
 {
     public function render()

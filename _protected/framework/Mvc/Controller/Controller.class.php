@@ -4,7 +4,7 @@
  * @desc             Base class for controllers.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Controller
  * @version          2.0
@@ -187,11 +187,10 @@ abstract class Controller extends Core implements Controllable
             'is_aff_auth' => AffiliateCore::auth()
         ];
         $aGlobalViewVars = [
+            'top_navbar_type' => M\DbConfig::getSetting('navbarType'),
             'is_guest_homepage' => $this->isGuestOnHomepage($aAuthViewVars['is_user_auth']),
             'is_disclaimer' => !$bIsMobApp && (bool)M\DbConfig::getSetting('disclaimer'),
-            'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar'),
-            'country' => Geo::getCountry(),
-            'city' => Geo::getCity()
+            'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar')
         ];
 
         $this->view->assigns($aAuthViewVars);

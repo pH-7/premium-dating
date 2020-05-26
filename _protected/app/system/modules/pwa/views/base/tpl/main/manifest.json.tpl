@@ -8,9 +8,9 @@
   "homepage_url": "{url_root}",
   "orientation": "{orientation}",
   "scope": "/",
-  "theme_color": "{bg_color}",
-  "background_color": "{bg_color}",
-  "display": "standalone",
+  "theme_color": "{hex_bg_color}",
+  "background_color": "{hex_bg_color}",
+  "display": "minimal-ui",
   "icons": [
     {
       "src": "{url_tpl_mod_img}icon-72x72.png",

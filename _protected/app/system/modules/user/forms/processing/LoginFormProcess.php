@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Form / Processing
  */
@@ -10,12 +10,14 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Security;
+use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Url\Header;
 use stdClass;
 
@@ -93,10 +95,20 @@ class LoginFormProcess extends Form implements LoginableForm
         } else {
             $oSecurityModel->clearLoginAttempts();
             $this->session->remove('captcha_user_enabled');
-            $iId = $this->oUserModel->getId($sEmail);
-            $oUserData = $this->oUserModel->readProfile($iId);
+            $iProfileId = $this->oUserModel->getId($sEmail);
+            $oUserData = $this->oUserModel->readProfile($iProfileId);
 
             $this->updatePwdHashIfNeeded($sPassword, $oUserData->password, $sEmail);
+
+            $sLocationName = Geo::getCountry();
+            if ($this->isForeignLocation($iProfileId, $sLocationName)) {
+                SecurityCore::sendSuspiciousLocationAlert(
+                    $sLocationName,
+                    $oUserData,
+                    $this->browser,
+                    $this->view
+                );
+            }
 
             if ($this->httpRequest->postExists(RememberMeCore::CHECKBOX_FIELD_NAME)) {
                 $this->session->set(RememberMeCore::STAY_LOGGED_IN_REQUESTED, 1);
@@ -104,7 +116,7 @@ class LoginFormProcess extends Form implements LoginableForm
 
             if ($this->isSmsVerificationEligible($oUserData)) {
                 // Store the user ID before redirecting to sms-verification module
-                $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iId);
+                $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iProfileId);
 
                 $this->redirectToSmsVerification();
             }
@@ -114,9 +126,9 @@ class LoginFormProcess extends Form implements LoginableForm
                 \PFBC\Form::setError('form_login_user', $mStatus);
             } else {
                 $o2FactorModel = new TwoFactorAuthCoreModel('user');
-                if ($o2FactorModel->isEnabled($iId)) {
+                if ($o2FactorModel->isEnabled($iProfileId)) {
                     // Store the user ID for 2FA
-                    $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
+                    $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iProfileId);
 
                     $this->redirectToTwoFactorAuth();
                 } else {
@@ -159,6 +171,23 @@ class LoginFormProcess extends Form implements LoginableForm
     {
         $iNumberAttempts = (int)$this->session->get('captcha_user_enabled');
         $this->session->set('captcha_user_enabled', $iNumberAttempts++);
+    }
+
+    /**
+     * @param int $iProfileId
+     * @param string $sLocationName
+     *
+     * @return bool
+     */
+    public function isForeignLocation($iProfileId, $sLocationName)
+    {
+        $sLatestUsedIp = $this->oUserModel->getLastUsedIp($iProfileId);
+
+        if (!empty($sLatestUsedIp) && (new Validate)->ip($sLatestUsedIp)) {
+            return Geo::getCountry($sLatestUsedIp) !== $sLocationName;
+        }
+
+        return false;
     }
 
     /**

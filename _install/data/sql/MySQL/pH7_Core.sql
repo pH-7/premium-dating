@@ -3,7 +3,7 @@
 -- Title:         SQL Core (base) Install File
 --
 -- Author:        Pierre-Henry Soria <hello@ph7cms.com>
--- Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+-- Copyright:     (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
 -- License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 -- Package:       PH7 / Install / Data / Sql / MySQL
 --
@@ -761,68 +761,44 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_login (
 
 
 CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
+  sessionId int(10) unsigned NOT NULL AUTO_INCREMENT,
   profileId tinyint(3) unsigned NOT NULL,
   username varchar(40) DEFAULT NULL,
-  password varchar(191) DEFAULT NULL,
   email varchar(120) DEFAULT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
-  sessionHash varchar(40) NOT NULL,
-  idHash char(32) NOT NULL,
-  lastActivity int(10) unsigned NOT NULL,
-  location varchar(191) DEFAULT NULL,
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
-  userAgent varchar(100) NOT NULL,
-  guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES ph7_admins(profileId),
-  KEY sessionHash (sessionHash),
-  KEY lastActivity (lastActivity)
+  PRIMARY KEY (sessionId),
+  FOREIGN KEY (profileId) REFERENCES ph7_admins(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
+  sessionId int(10) unsigned NOT NULL AUTO_INCREMENT,
   profileId int(10) unsigned NOT NULL,
   username varchar(40) DEFAULT NULL,
-  password varchar(120) DEFAULT NULL,
   email varchar(120) DEFAULT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
-  sessionHash varchar(40) NOT NULL,
-  idHash char(32) NOT NULL,
-  lastActivity int(10) unsigned NOT NULL,
-  location varchar(191) DEFAULT NULL,
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
-  userAgent varchar(100) NOT NULL,
-  guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId),
-  KEY sessionHash (sessionHash),
-  KEY lastActivity (lastActivity)
+  PRIMARY KEY (sessionId),
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
+  sessionId int(10) unsigned NOT NULL AUTO_INCREMENT,
   profileId int(10) unsigned NOT NULL,
   username varchar(40) DEFAULT NULL,
-  password varchar(120) DEFAULT NULL,
   email varchar(120) DEFAULT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
-  sessionHash varchar(40) NOT NULL,
-  idHash char(32) NOT NULL,
-  lastActivity int(10) unsigned NOT NULL,
-  location varchar(191) DEFAULT NULL,
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
-  userAgent varchar(100) NOT NULL,
-  guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES ph7_affiliates(profileId),
-  KEY sessionHash (sessionHash),
-  KEY lastActivity (lastActivity)
+  PRIMARY KEY (sessionId),
+  FOREIGN KEY (profileId) REFERENCES ph7_affiliates(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -970,7 +946,7 @@ CREATE TABLE IF NOT EXISTS ph7_modules (
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7CMS SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.5.7', 1);
+('pH7CMS', 'SQL System Schema', '1.5.9', 1);
 
 
 CREATE TABLE IF NOT EXISTS ph7_report (
@@ -999,6 +975,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('siteName', @sDefaultSiteName, '', 'general'),
 ('defaultLanguage', 'en_US', '', 'language'),
 ('defaultTemplate', @sDefaultTemplate, '', 'design'),
+('navbarType', 'default', 'Choose between "default" or "dark"', 'design'),
 ('backgroundColor', '', 'Override background color. Leave empty to disable', 'design'),
 ('textColor', '', 'Override text color. Leave empty to disable', 'design'),
 ('heading1Color', '', 'Override H1 color. Leave empty to disable', 'design'),

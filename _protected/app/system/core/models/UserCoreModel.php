@@ -14,7 +14,6 @@ use PDO;
 use PH7\Framework\CArray\ObjArr;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
-use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
@@ -132,27 +131,22 @@ class UserCoreModel extends Model
     }
 
     /**
-     * Set Log Session.
-     *
-     * @param string $sEmail
-     * @param string $sUsername
-     * @param string $sFirstName
+     * @param int $iProfileId
      * @param string $sTable
      *
-     * @return void
+     * @return string The latest used user's IP address.
      */
-    public function sessionLog($sEmail, $sUsername, $sFirstName, $sTable = DbTableName::MEMBER)
+    public function getLastUsedIp($iProfileId, $sTable = DbTableName::MEMBER)
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable . '_log_sess') . '(email, username, firstName, ip)
-        VALUES (:email, :username, :firstName, :ip)');
-        $rStmt->bindValue(':email', $sEmail, PDO::PARAM_STR);
-        $rStmt->bindValue(':username', $sUsername, PDO::PARAM_STR);
-        $rStmt->bindValue(':firstName', $sFirstName, PDO::PARAM_STR);
-        $rStmt->bindValue(':ip', Ip::get(), PDO::PARAM_STR);
+        $rStmt = Db::getInstance()->prepare('SELECT ip FROM' . Db::prefix($sTable . '_log_sess') . 'WHERE profileId = :profileId ORDER BY dateTime DESC LIMIT 1');
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         $rStmt->execute();
+        $sLastUsedIp = $rStmt->fetchColumn();
         Db::free($rStmt);
+
+        return $sLastUsedIp;
     }
 
     /**
@@ -364,7 +358,7 @@ class UserCoreModel extends Model
         $sSqlMiddleName = $bIsMiddleName ? ' AND LOWER(middleName) LIKE LOWER(:middleName)' : '';
         $sSqlLastName = $bIsLastName ? ' AND LOWER(lastName) LIKE LOWER(:lastName)' : '';
         $sSqlSingleAge = $bIsSingleAge ? ' AND birthDate LIKE :birthDate ' : '';
-        $sSqlAge = $bIsAge ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
+        $sSqlAge = $bIsAge ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :maxAge YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :minAge YEAR) ' : '';
         $sSqlHeight = $bIsHeight ? ' AND height = :height ' : '';
         $sSqlWeight = $bIsWeight ? ' AND weight = :weight ' : '';
         $sSqlCountry = $bIsCountry ? ' AND country = :country ' : '';
@@ -417,8 +411,8 @@ class UserCoreModel extends Model
             $rStmt->bindValue(':birthDate', '%' . $aParams[SearchQueryCore::AGE] . '%', PDO::PARAM_STR);
         }
         if ($bIsAge) {
-            $rStmt->bindValue(':age1', $aParams[SearchQueryCore::MIN_AGE], PDO::PARAM_INT);
-            $rStmt->bindValue(':age2', $aParams[SearchQueryCore::MAX_AGE], PDO::PARAM_INT);
+            $rStmt->bindValue(':minAge', $aParams[SearchQueryCore::MIN_AGE], PDO::PARAM_INT);
+            $rStmt->bindValue(':maxAge', $aParams[SearchQueryCore::MAX_AGE], PDO::PARAM_INT);
         }
         if ($bIsHeight) {
             $rStmt->bindValue(':height', $aParams[SearchQueryCore::HEIGHT], PDO::PARAM_INT);

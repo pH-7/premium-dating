@@ -79,6 +79,12 @@ class AffiliateCore extends UserCore
             'Logged in!',
             DbTableName::AFFILIATE
         );
+        $oSecurityModel->addSessionLog(
+            $oAffData->profileId,
+            $oAffData->email,
+            $oAffData->firstName,
+            DbTableName::AFFILIATE
+        );
         $oAffModel->setLastActivity($oAffData->profileId, DbTableName::AFFILIATE);
     }
 

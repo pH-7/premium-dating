@@ -12,7 +12,11 @@
 
 
     {* Menu for All *}
-      <nav class="navbar navbar-default navbar-fixed-top">
+      {if $top_navbar_type === 'inverse'}
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+      {else}
+        <nav class="navbar navbar-default navbar-fixed-top">
+      {/if}
         <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
@@ -70,7 +74,7 @@
 
             {if $is_map_enabled}
               <li>
-                <a href="{{ $design->url('map','country','index',$country.PH7_SH.$city) }}" title="{lang 'Users in %0% through the Map!',$city}"><i class="fa fa-map-marker"></i> {lang 'People Nearby'}</a>
+                <a href="{{ $design->url('map', 'country', 'index', Framework\Geo\Ip\Geo::getCountry() . PH7_SH. Framework\Geo\Ip\Geo::getCity()) }}" title="{lang 'Users nearby through the map!'}"><i class="fa fa-map-marker"></i> {lang 'People Nearby'}</a>
               </li>
             {/if}
 
@@ -204,7 +208,7 @@
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My Settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'Edit Profile'}</a></li>
               <li><a href="{% (new UserCore)->getProfileLink($username) %}" title="{lang 'See My Profile'}"><i class="fa fa-user fa-fw"></i> {lang 'See My Profile'}</a></li>
-              <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change Profile Photo'}"><i class="fa fa-upload"></i> {lang 'Change Profile Photo'}</a></li>
+              <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change Profile Photo'}"><i class="fa fa-upload"></i> {lang 'Profile Photo'}</a></li>
 
               {if $is_picture_enabled}
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-picture-o"></i> {lang 'Photo Gallery'}</a>
@@ -240,7 +244,7 @@
                       </a>
                   <ul class="dropdown-menu" role="menu">
                       <li><a href="{{ $design->url('friend','main','index') }}" title="{lang 'Friends List'}">{lang 'Friends List'}</a></li>
-                    <li><a href="{{ $design->url('friend','main','search',$username) }}" title="{lang 'Find a friend in my list'}">{lang 'Find a Friend'}</a></li>
+                    <li><a href="{{ $design->url('friend','main','search',$username) }}" title="{lang 'Find a friend from my list'}">{lang 'Find a Friend'}</a></li>
                   </ul>
                 </li>
               {/if}
@@ -251,7 +255,7 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('user','visitor','index') }}" title="{lang 'Who Visited My Profile'}">{lang 'Who See Me'}</a></li>
-                  <li><a href="{{ $design->url('user','visitor','search') }}" title="{lang 'Find who visited my profile'}">{lang 'Find Visitor(s)'}</a></li>
+                  <li><a href="{{ $design->url('user','visitor','search',$username) }}" title="{lang 'See who visited my profile'}">{lang 'Find Visitor(s)'}</a></li>
                 </ul>
               </li>
 
@@ -524,8 +528,9 @@
           <ul class="dropdown-menu" role="menu">
             <li><a class="bold" href="{{ $design->url('ph7cms-helper','main','suggestionbox','?box=donationbox') }}" title="{lang 'Will You Be Nice Today? Like 81% of our users who contribute on a regular basis.'}"><i class="fa fa-trophy"></i> {lang 'Will You Be Nice Today?'} <span class="label label-primary">{lang 'HELP'}</span></a></li>
             <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
-            <li><a href="{software_review_url}" title="{lang 'Help pH7CMS by giving a nice review! Highly appreciated :)'}"><i class="fa fa-heart"></i> {lang 'Give Nice Review'}</a></li>
             <li><a href="{software_issue_url}" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
+            {* <li><a href="https://ph7cms-forum.com" title="{lang 'Discussions Board'}"><i class="fa fa-bug"></i> {lang 'Forums'}</a></li> *}
+            <li><a href="{software_review_url}" title="{lang 'Help pH7CMS by giving a nice review! Highly appreciated :)'}"><i class="fa fa-heart"></i> {lang 'Give Nice Review'}</a></li>
           </ul>
         </li>
 

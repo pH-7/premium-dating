@@ -21,34 +21,20 @@
     <meta name="category" content="{meta_category}" />
     <meta name="rating" content="{meta_rating}" />
     <meta name="distribution" content="{meta_distribution}" />
-    <meta name="theme-color" content="#ffffff" />
     {if $header}{header}{/if}
 
     {if $is_pwa_enabled}
-       <link rel="manifest" href="{{ $design->url('pwa','main','manifest') }}" />
-       {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS, 'sw-register.js') }}
-       <link rel="apple-touch-icon" sizes="57x57" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-57x57.png">
-       <link rel="apple-touch-icon" sizes="60x60" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-60x60.png">
-       <link rel="apple-touch-icon" sizes="72x72" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-72x72.png">
-       <link rel="apple-touch-icon" sizes="76x76" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-76x76.png">
-       <link rel="apple-touch-icon" sizes="114x114" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-114x114.png">
-       <link rel="apple-touch-icon" sizes="144x144" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-144x144.png">
-       <link rel="apple-touch-icon" sizes="152x152" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-152x152.png">
-       <link rel="apple-touch-icon" sizes="180x180" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-180x180.png">
-       <link rel="icon" type="image/png" sizes="32x32" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-32x32.png">
-       <link rel="icon" type="image/png" sizes="96x96" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-96x96.png">
-       <link rel="icon" type="image/png" sizes="16x16" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-16x16.png">
-       <meta name="apple-mobile-web-app-capable" content="yes">
-       <meta name="apple-mobile-web-app-title" content="{site_name}">
-       <meta name="msapplication-TileColor" content="#ffffff">
-       <meta name="msapplication-TileImage" content="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}ms-icon-144x144.png">
+      <link rel="manifest" href="{{ $design->url('pwa','main','manifest') }}" />
+      <meta name="msapplication-config" content="{{ $design->url('pwa','main','browserconfig') }}" />
+      {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS, 'sw-register.js') }}
+      {main_include 'pwa-icon-tags.inc.tpl'}
     {/if}
 
     <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
     <!-- Do not modify or remove this code! Think of those who spend a lot of time to develop this CMS & Framework for you -->
     <meta name="creator" content="pH7CMS, Pierre-Henry Soria - {software_url}" />
     <meta name="designer" content="pH7CMS, Pierre-Henry Soria - {software_url}" />
-    <meta name="generator" content="{software_name}, {software_version}" />
+    <meta name="generator" content="{software_name}, v{software_version}" />
     <!-- End Copyright -->
 
     <!-- End Title and Meta -->
@@ -58,7 +44,12 @@
     {{ $design->externalCssFile(PH7_URL_STATIC. PH7_CSS . 'font-awesome.css') }}
     {{ $design->staticFiles('css', PH7_STATIC . PH7_CSS . 'js/jquery/box/', 'box.css') }} {* We have to include box CSS alone because it includes images in its folder *}
     {{ $design->staticFiles('css', PH7_STATIC . PH7_CSS, 'bootstrap.css,bootstrap_customize.css,animate.css') }}
-    {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'common.css,style.css,layout.css,menu.css,like.css,color.css,form.css,js/jquery/rating.css,js/jquery/apprise.css,js/jquery/tipTip.css') }}
+    {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'common.css,style.css,layout.css,like.css,color.css,form.css,js/jquery/rating.css,js/jquery/apprise.css,js/jquery/tipTip.css') }}
+    {if $top_navbar_type === 'inverse'}
+      {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'menu_inverse.css') }}
+    {else}
+      {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'menu.css') }}
+    {/if}
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans" />
 
     {* Custom CSS code *}
@@ -170,18 +161,6 @@
       <div role="banner" class="center ad_728_90">
           {designModel.ad(728, 90)}
       </div>
-
-      {* To avoid scammers *}
-      {if $is_user_auth AND $current_url != $url_root}
-        <div class="warning_block center">
-          <p>
-            <strong>{lang 'Attention!'}</strong>
-            {lang 'Some of the women (or men) profiles you see on dating sites might be scams to collect money.'}<br />
-            {lang 'People who are really interested in you will never ask for money.'}<br />
-            {lang "Be careful, don't send the money to anybody!"}
-          </p>
-        </div>
-      {/if}
 
       <div role="contentinfo">
         <div class="ft_copy">

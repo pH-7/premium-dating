@@ -410,6 +410,11 @@ class UserCore
             '*****',
             'Logged in!'
         );
+        $oSecurityModel->addSessionLog(
+            $oUserData->profileId,
+            $oUserData->email,
+            $oUserData->firstName
+        );
         $oUserModel->setLastActivity($oUserData->profileId);
     }
 

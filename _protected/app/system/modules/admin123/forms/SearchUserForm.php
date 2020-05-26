@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
@@ -27,9 +27,24 @@ class SearchUserForm
         }
 
         $oForm = new \PFBC\Form('form_user_search');
-        $oForm->configure(['action' => Uri::get(PH7_ADMIN_MOD, 'user', 'result') . PH7_SH, 'method' => 'get']);
-        $oForm->addElement(new Hidden('submit_user_search', 'form_user_search'));
-        $oForm->addElement(new Textbox(t('Search for:'), 'what'));
+        $oForm->configure(
+            [
+                'action' => Uri::get(PH7_ADMIN_MOD, 'user', 'result') . PH7_SH,
+                'method' => 'get'
+            ]
+        );
+        $oForm->addElement(
+            new Hidden(
+                'submit_user_search',
+                'form_user_search'
+            )
+        );
+        $oForm->addElement(
+            new Textbox(
+                t('Search for:'),
+                'what'
+            )
+        );
         $oForm->addElement(
             new Select(
                 t('Where:'),
@@ -46,16 +61,25 @@ class SearchUserForm
             )
         );
 
-        $oForm->addElement(new Select(t('Membership Group:'), 'group_id', $aGroupName, ['value' => 2]));
+        $oForm->addElement(
+            new Select(
+                t('Membership Group:'),
+                'group_id',
+                $aGroupName,
+                ['value' => 2]
+            )
+        );
         unset($aGroupName);
 
-        $oForm->addElement(new Checkbox('', 'ban', ['1' => '<span class="bold">' . t('Only banned user') . '</span>']));
+        $oForm->addElement(
+            new Checkbox('', 'ban', ['1' => '<span class="bold">' . t('Only banned user') . '</span>'])
+        );
         $oForm->addElement(
             new Select(
                 t('Browse By:'),
                 'order',
                 [
-                    SearchCoreModel::LATEST => t('Latest Members'),
+                    SearchCoreModel::LATEST => t('Newest'),
                     SearchCoreModel::LAST_ACTIVITY => t('Last Activity'),
                     SearchCoreModel::LAST_EDIT => t('Last Account Edit'),
                     SearchCoreModel::PENDING_APPROVAL => t('Pending approval'),
@@ -78,7 +102,13 @@ class SearchUserForm
                 ]
             )
         );
-        $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
+        $oForm->addElement(
+            new Button(
+                t('Search'),
+                'submit',
+                ['icon' => 'search']
+            )
+        );
         $oForm->render();
     }
 }
