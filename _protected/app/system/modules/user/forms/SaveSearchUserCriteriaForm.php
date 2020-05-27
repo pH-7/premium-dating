@@ -11,6 +11,7 @@ namespace PH7;
 use PFBC\Element\Button;
 use PFBC\Element\Hidden;
 use PFBC\Element\Textbox;
+use PFBC\Validation\Str;
 use PH7\Framework\Url\Header;
 
 class SaveSearchUserCriteriaForm
@@ -25,7 +26,6 @@ class SaveSearchUserCriteriaForm
             Header::redirect();
         }
 
-        // Generate the Quick Search form
         $oForm = new \PFBC\Form('form_save_search');
         $oForm->configure(['action' => '']);
         $oForm->addElement(
@@ -36,8 +36,13 @@ class SaveSearchUserCriteriaForm
         );
         $oForm->addElement(
             new Textbox(
-                t('Save Search:'),
-                'search_name'
+                t('Search Name:'),
+                'search_name',
+                [
+                    'placeholder' => t('My search 🎉'),
+                    'validation' => new Str(3, 50),
+                    'required' => 1
+                ]
             )
         );
 
