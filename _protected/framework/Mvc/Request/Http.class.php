@@ -286,7 +286,7 @@ class Http extends \PH7\Framework\Http\Http
     /**
      * Get Request URI.
      *
-     * @return string URI
+     * @return string Gives the REQUEST_URI with the relative subfolder path and the left first slash removed.
      */
     public function requestUri()
     {

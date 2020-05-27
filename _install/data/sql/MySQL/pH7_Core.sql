@@ -1644,3 +1644,14 @@ INSERT INTO ph7_affiliates_countries (countryCode) VALUES
 ('ZA'),
 ('ZM'),
 ('ZW');
+
+
+/** Part of Premium Theme **/
+CREATE TABLE IF NOT EXISTS ph7_search_saved (
+  savedSearchId tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL,
+  searchName varchar(60) DEFAULT NULL,
+  searchQueries varchar(191) NOT NULL,
+  PRIMARY KEY (savedSearchId),
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;

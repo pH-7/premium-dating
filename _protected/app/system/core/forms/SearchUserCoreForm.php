@@ -294,6 +294,14 @@ class SearchUserCoreForm
                 ]
             )
         );
+        if (UserCore::auth()) {
+            $oForm->addElement(
+                new Textbox(
+                    t('Save Search:'),
+                    'saved_search'
+                )
+            );
+        }
         $oForm->addElement(
             new Button(
                 t('Search'),
