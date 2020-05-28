@@ -2,9 +2,14 @@
     {{ SearchUserCoreForm::advanced() }}
     {{ SaveSearchUserCriteriaForm::display() }}
 
-    {each $saved_search in $saved_searches}
-
-    {/each}
+    {if !empty(saved_searches)}
+        <p>{lang 'Vos recherches sauvegardées'}</p>
+        <ul>
+            {each $saved_search in $saved_searches}
+                <li>{{ $design->url('user', 'browse', 'index', "?$saved_search") }}</li>
+            {/each}
+        </ul>
+    {/if}
 </div>
 
 <div class="right col-md-2 col-md-offset-2 ad_160_600">
