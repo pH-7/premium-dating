@@ -298,7 +298,7 @@ class SearchUserCoreForm
             $oForm->addElement(
                 new Textbox(
                     t('Save Search:'),
-                    'saved_search'
+                    'save_search'
                 )
             );
         }

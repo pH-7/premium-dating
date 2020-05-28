@@ -20,13 +20,15 @@ class SavedSearchModel extends Model
 
     public function __construct($iProfileId = null)
     {
+        parent::__construct();
+
         $this->iProfileId = $iProfileId;
     }
 
     public function saveCriteria(array $aData)
     {
         $this->orm->insert(
-            DbTableName::SAVED_SEARCH,
+            DbTableName::SEARCH_SAVED,
             $aData
         );
     }
@@ -37,7 +39,7 @@ class SavedSearchModel extends Model
      */
     public function retrieveSearch()
     {
-        $sSql = 'SELECT searchQueries FROM' . Db::prefix(DbTableName::SAVED_SEARCH) . 'WHERE profileId = :profileId';
+        $sSql = 'SELECT searchQueries FROM' . Db::prefix(DbTableName::SEARCH_SAVED) . 'WHERE profileId = :profileId';
         $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindValue(':profileId', $this->iProfileId, PDO::PARAM_INT);
         $rStmt->execute();
@@ -54,7 +56,7 @@ class SavedSearchModel extends Model
      */
     public function removeSearch($iSavedSearchId)
     {
-        $sSql = 'DELETE FROM' . Db::prefix(DbTableName::SAVED_SEARCH) . 'WHERE savedSearchId = :savedSearchId AND profileId = :profileId LIMIT 1';
+        $sSql = 'DELETE FROM' . Db::prefix(DbTableName::SEARCH_SAVED) . 'WHERE savedSearchId = :savedSearchId AND profileId = :profileId LIMIT 1';
         $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindValue(':savedSearchId', $iSavedSearchId, PDO::PARAM_INT);
         $rStmt->bindValue(':profileId', $this->iProfileId, PDO::PARAM_INT);

@@ -12,11 +12,13 @@ class SaveSearchUserCriteriaFormProcess extends Form
 {
     public function __construct()
     {
-        $sSearchName = $this->httpRequest->get('search_name');
+        parent::__construct();
+
+        $sSearchName = $this->httpRequest->post('search_name');
         $aData = [
-            'profileId' => $this->session->get('member_id'),
+            'profileId' => (int)$this->session->get('member_id'),
             'searchName' => $sSearchName,
-            'searchQueries' => $this->httpRequest->getQueryString()
+            'searchQueries' => $this->httpRequest->post('search_queries')
         ];
         (new SavedSearchModel)->saveCriteria($aData);
 

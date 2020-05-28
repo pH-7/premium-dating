@@ -2,7 +2,7 @@
     {{ SearchUserCoreForm::advanced() }}
     {{ SaveSearchUserCriteriaForm::display() }}
 
-    {if !empty(saved_searches)}
+    {if !empty($saved_searches)}
         <p>{lang 'Vos recherches sauvegardées'}</p>
         <ul>
             {each $saved_search in $saved_searches}

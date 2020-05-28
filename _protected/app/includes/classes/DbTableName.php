@@ -73,7 +73,7 @@ final class DbTableName
     const CUSTOM_CODE = 'custom_code';
     const GAME = 'games';
     const GAME_CATEGORY = 'games_categories';
-    const SAVED_SEARCH = 'saved_search';
+    const SEARCH_SAVED = 'search_saved';
 
     const USER_TABLES = [
         self::ADMIN,

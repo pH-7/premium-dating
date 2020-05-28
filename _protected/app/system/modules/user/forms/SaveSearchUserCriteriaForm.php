@@ -12,6 +12,7 @@ use PFBC\Element\Button;
 use PFBC\Element\Hidden;
 use PFBC\Element\Textbox;
 use PFBC\Validation\Str;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Url\Header;
 
 class SaveSearchUserCriteriaForm
@@ -32,6 +33,12 @@ class SaveSearchUserCriteriaForm
             new Hidden(
                 'submit_save_search',
                 'form_save_search'
+            )
+        );
+        $oForm->addElement(
+            new Hidden(
+                'search_queries',
+                (new HttpRequest)->getQueryString()
             )
         );
         $oForm->addElement(
