@@ -1009,6 +1009,9 @@ class UserCoreModel extends Model
         // DELETE BACKGROUND
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . 'WHERE profileId = ' . $iProfileId);
 
+        // DELETE SAVED SEARCHES
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::SEARCH_SAVED) . 'WHERE profileId = ' . $iProfileId);
+
         // DELETE NOTES
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'WHERE profileId = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::NOTE) . 'WHERE profileId = ' . $iProfileId);
