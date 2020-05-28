@@ -38,7 +38,7 @@ class SaveSearchUserCriteriaForm
         $oForm->addElement(
             new Hidden(
                 'search_queries',
-                (new HttpRequest)->getQueryString()
+                (new HttpRequest)->requestUri()
             )
         );
         $oForm->addElement(
@@ -46,7 +46,7 @@ class SaveSearchUserCriteriaForm
                 t('Search Name:'),
                 'search_name',
                 [
-                    'placeholder' => t('My search 🎉'),
+                    'placeholder' => t('Ma recherche 🎉'),
                     'validation' => new Str(3, 50),
                     'required' => 1
                 ]
@@ -57,7 +57,7 @@ class SaveSearchUserCriteriaForm
             new Button(
                 t('Save'),
                 'submit',
-                ['icon' => 'save']
+                ['icon' => 'check']
             )
         );
         $oForm->render();
