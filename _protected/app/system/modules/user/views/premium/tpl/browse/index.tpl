@@ -35,6 +35,10 @@
             </div>
         {/each}
 
+    {if User::auth()}
+        {include 'saved_search.inc.tpl'}
+    {/if}
+
         {main_include 'page_nav.inc.tpl'}
     {/if}
 
