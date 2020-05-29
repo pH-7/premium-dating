@@ -46,8 +46,8 @@ class SaveSearchUserCriteriaForm
                 t('Search Name:'),
                 'search_name',
                 [
-                    'placeholder' => t('Ma recherche 🎉'),
-                    'validation' => new Str(3, 50),
+                    'placeholder' => t('Ma recherche ...'),
+                    'validation' => new Str(2, 50),
                     'required' => 1
                 ]
             )

@@ -39,7 +39,7 @@ class SavedSearchModel extends Model
      */
     public function retrieveSearch()
     {
-        $sSql = 'SELECT searchQueries FROM' . Db::prefix(DbTableName::SEARCH_SAVED) . 'WHERE profileId = :profileId';
+        $sSql = 'SELECT * FROM' . Db::prefix(DbTableName::SEARCH_SAVED) . 'WHERE profileId = :profileId';
         $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindValue(':profileId', $this->iProfileId, PDO::PARAM_INT);
         $rStmt->execute();

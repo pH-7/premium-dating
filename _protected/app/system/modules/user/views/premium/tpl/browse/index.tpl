@@ -35,9 +35,13 @@
             </div>
         {/each}
 
-    {if User::auth()}
-        {include 'saved_search.inc.tpl'}
-    {/if}
+        {if User::auth()}
+            <div class="row">
+                <div class="pull-left col-xs-6">
+                    {include 'saved_search.inc.tpl'}
+                </div>
+            </div>
+        {/if}
 
         {main_include 'page_nav.inc.tpl'}
     {/if}

@@ -33,12 +33,6 @@ class SearchController extends Controller
     public function advanced()
     {
         $this->view->page_title = $this->view->h1_title = t('Advanced Search');
-
-        if (User::auth()) {
-            $this->view->saved_searches = (new SavedSearchModel($this->session->get('member_id')))
-                ->retrieveSearch();
-        }
-
         $this->output();
     }
 }

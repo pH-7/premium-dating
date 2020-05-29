@@ -68,6 +68,11 @@ class BrowseController extends Controller
             $this->view->avatarDesign = new AvatarDesignCore;
             $this->view->users = $oUsers;
 
+            if (User::auth()) {
+                $this->view->saved_searches = (new SavedSearchModel($this->session->get('member_id')))
+                    ->retrieveSearch();
+            }
+
             $this->output();
         }
     }

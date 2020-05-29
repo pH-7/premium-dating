@@ -1,10 +1,14 @@
-{if User::auth()}
-    {{ SaveSearchUserCriteriaForm::display() }}
+{{ SaveSearchUserCriteriaForm::display() }}
 
-    <p>{lang 'Vos recherches sauvegardées'}</p>
-    <ul>
+{if !empty($saved_searches) && count($saved_searches) > 0}
+    <p class="bold">{lang 'Vos recherches sauvegardées'}</p>
+    <ol>
         {each $saved_search in $saved_searches}
-            <li>{{ $design->url('user', 'browse', 'index', "?{$saved_search->searchQueries}") }}</li>
+            <li>
+                <a href="{url_root}{% $saved_search->searchQueries %}">
+                    {% $saved_search->searchName %}
+                </a>
+            </li>
         {/each}
-    </ul>
+    </ol>
 {/if}
