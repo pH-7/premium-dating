@@ -73,20 +73,6 @@
                 <a href="{{ $design->url('map','country','index',$country.PH7_SH.$city) }}" title="{lang 'Users in %0% through the Map!',$city}"><i class="fa fa-map-marker"></i> {lang 'People Nearby'}</a>
               </li>
             {/if}
-
-            {if $is_birthday_enabled}
-              <li class="menu-item dropdown dropdown-submenu">
-                <a href="{{ $design->url('birthday', 'user', 'index') }}" title="{lang 'User Birthdays'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">
-                  <i class="fa fa-birthday-cake"></i> {lang 'Birthdays'}
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="{{ $design->url('birthday', 'user', 'index', 'all') }}" rel="nofollow" title="{lang 'All Birthdays'}" data-load="ajax">{lang 'All Birthdays'}</a></li>
-                  <li><a href="{{ $design->url('birthday', 'user', 'index', 'male') }}" title="{lang 'Men Birthdays'}" data-load="ajax">{lang 'Men Birthdays'}</a></li>
-                  <li><a href="{{ $design->url('birthday', 'user', 'index', 'female') }}" title="{lang 'Women Birthdays'}" data-load="ajax">{lang 'Women Birthdays'}</a></li>
-                  <li><a href="{{ $design->url('birthday', 'user', 'index', 'couple') }}" title="{lang 'Couple Birthdays'}" data-load="ajax">{lang 'Couple Birthdays'}</a></li>
-                </ul>
-              </li>
-            {/if}
           </ul>
         </li>
       {/if}
@@ -125,41 +111,6 @@
             </ul>
           </li>
         {/if}
-
-        {if $is_video_enabled}
-          <li class="dropdown"><a href="{{ $design->url('video','main','index') }}" title="{lang 'Video Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-youtube-play"></i> {lang 'Video'} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('video','main','index') }}" rel="nofollow" title="{lang 'Video Gallery'}" data-load="ajax"><i class="fa fa-youtube-play"></i> {lang 'Videos'}</a></li>
-              <li><a href="{{ $design->url('video','main','search') }}" title="{lang 'Search Videos'}" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
-            </ul>
-          </li>
-        {/if}
-
-        {if $is_game_enabled}
-          <li class="dropdown"><a href="{{ $design->url('game','main','index') }}" title="{lang 'Games Zone'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-gamepad"></i> {lang 'Game'} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('game','main','index') }}" rel="nofollow" title="{lang 'Games Zone'}" data-load="ajax"><i class="fa fa-gamepad"></i> {lang 'Game'}</a></li>
-              <li><a href="{{ $design->url('game','main','search') }}" title="{lang 'Search Games'}" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
-            </ul>
-          </li>
-        {/if}
-
-        {if $is_forum_enabled}
-          <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Forums'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Forum'} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{lang 'Forums'}" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Forum'}</a></li>
-              <li><a href="{{ $design->url('forum','forum','search') }}" title="{lang 'Search Topics'}" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
-            </ul>
-          </li>
-        {/if}
-
-        {if $is_note_enabled}
-          <li class="dropdown"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Community Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-newspaper-o"></i> {lang 'Note'} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('note','main','index') }}" rel="nofollow" title="{lang 'Community Notes'}" data-load="ajax"><i class="fa fa-newspaper-o"></i> {lang 'Notes'}</a></li>
-              <li><a href="{{ $design->url('note','main','search') }}" title="{lang 'Search Notes'}" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
-            </ul>
-          </li>
         {/if}
       {/if}
 
@@ -211,15 +162,6 @@
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="{{ $design->url('picture','main','addalbum') }}" title="{lang 'Add an Album'}">{lang 'Add an Album'}</a></li>
                     <li><a href="{{ $design->url('picture','main','albums',$username) }}" title="{lang 'My Albums'}" data-load="ajax">{lang 'My Albums'}</a></li>
-                  </ul>
-                </li>
-              {/if}
-
-              {if $is_video_enabled}
-                <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('video','main','index') }}" title="{lang 'Videos Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-youtube-play"></i> {lang 'Videos Gallery'}</a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ $design->url('video','main','addalbum') }}" title="{lang 'Add an Album'}">{lang 'Add an Album'}</a></li>
-                    <li><a href="{{ $design->url('video','main','albums',$username) }}" title="{lang 'My Albums'}" data-load="ajax">{lang 'My Albums'}</a></li>
                   </ul>
                 </li>
               {/if}
@@ -416,10 +358,6 @@
               </li>
             {/if}
 
-            {if $is_video_enabled}
-              <li><a href="{{ $design->url('video', 'admin', 'config') }}"><i class="fa fa-youtube-play"></i> {lang 'Video Youtube API key'}</a></li>
-            {/if}
-
             {if $is_smsverification_enabled}
               <li><a href="{{ $design->url('sms-verification', 'admin', 'config') }}"><i class="fa-user-check"></i> {lang 'SMS Gateway Verification APIs'}</a></li>
             {/if}
@@ -437,8 +375,6 @@
 
             $count_moderate_total_picture_album = $oModeratorModel->totalPictureAlbums();
             $count_moderate_total_picture = $oModeratorModel->totalPictures();
-            $count_moderate_total_video_album = $oModeratorModel->totalVideoAlbums();
-            $count_moderate_total_video = $oModeratorModel->totalVideos();
             $count_moderate_total_avatar = $oModeratorModel->totalAvatars();
             $count_moderate_total_background = $oModeratorModel->totalBackgrounds();
             $count_moderate_total_note = $oModeratorModel->totalNotes();
@@ -453,8 +389,6 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturealbum') }}" title="{lang 'Moderate Photo Albums'}"><i class="fa fa-picture-o"></i> {lang 'Photo Albums'} {if $count_moderate_total_picture_album }<span class="badge">{count_moderate_total_picture_album}</span>{/if}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{lang 'Moderate Pictures'}"><i class="fa fa-picture-o"></i> {lang 'Photos'} {if $count_moderate_total_picture }<span class="badge">{count_moderate_total_picture}</span>{/if}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','videoalbum') }}" title="{lang 'Moderate Video Albums'}"><i class="fa fa-youtube-play"></i> {lang 'Video Albums'} {if $count_moderate_total_video_album }<span class="badge">{count_moderate_total_video_album}</span>{/if}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}"><i class="fa fa-youtube-play"></i> {lang 'Videos'} {if $count_moderate_total_video }<span class="badge">{count_moderate_total_video}</span>{/if}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Profile Photos'}"><i class="fa fa-picture-o"></i> {lang 'Profile Photos'} {if $count_moderate_total_avatar }<span class="badge">{count_moderate_total_avatar}</span>{/if}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}"><i class="fa fa-picture-o"></i> {lang 'Profile Backgrounds'} {if $count_moderate_total_background}<span class="badge">{count_moderate_total_background}</span>{/if}</a></li>
 
