@@ -22,6 +22,9 @@ class SaveSearchUserCriteriaFormProcess extends Form
         ];
         (new SavedSearchModel)->saveCriteria($aData);
 
-        \PFBC\Form::setSuccess('form_save_search', t('Search has been successfully saved.'));
+        \PFBC\Form::setSuccess(
+            'form_save_search',
+            t('Search has been successfully saved.')
+        );
     }
 }
