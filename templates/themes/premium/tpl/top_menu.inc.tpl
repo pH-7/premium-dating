@@ -11,7 +11,7 @@
     }}
 
 
-    {* Menu for All *}
+    {* Menu for all *}
       <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -49,7 +49,7 @@
       {/if}
 
 
-    {* Menu Guest, Member and Admin *}
+    {* Guest, Member and Admin menu (except for Affiliate) *}
       {if !$is_aff_auth}
         <li class="dropdown">
           <a href="{{ $design->url('user', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">
@@ -78,7 +78,7 @@
       {/if}
 
 
-    {* Menu Guest, Member and LoginUserAs of Admin Panel *}
+    {* Guest, Member and LoginUserAs from Admin Panel menu *}
       {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user }
         {if $is_chat_enabled OR $is_chatroulette_enabled}
           <li class="dropdown"><a href="#" title="{lang 'Free Social Dating Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'} <span class="caret"></span></a>
