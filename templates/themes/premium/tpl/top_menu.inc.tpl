@@ -83,31 +83,10 @@
         {if $is_chat_enabled OR $is_chatroulette_enabled}
           <li class="dropdown"><a href="#" title="{lang 'Free Social Dating Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              {if $is_chat_enabled}
-                <li><a href="{{ $design->url('chat','home','index') }}" rel="nofollow" title="{lang 'Chat Rooms'}" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'}</a></li>
-              {/if}
-
               {if $is_chatroulette_enabled}
                 <li><a href="{{ $design->url('chatroulette','home','index') }}" title="{lang 'Chat Roulette'}"><i class="fa fa-random"></i> {lang 'Chatroulette'}</a></li>
               {/if}
 
-            </ul>
-          </li>
-        {/if}
-
-        {if $is_picture_enabled}
-          <li class="dropdown">
-            <a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">
-              <i class="fa fa-picture-o"></i> {lang 'Photo'} <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('picture','main','index') }}" rel="nofollow" title="{lang 'Photo Gallery'}" data-load="ajax"><i class="fa fa-picture-o"></i> {lang 'Photos'}</a></li>
-
-              {if $is_hotornot_enabled}
-                <li><a href="{{ $design->url('hotornot','main','rating') }}" title="{lang 'Hot Or Not'}" data-load="ajax"><i class="fa fa-heart-o"></i> {lang 'Hot Or Not'}</a></li>
-              {/if}
-
-              <li><a href="{{ $design->url('picture','main','search') }}" title="{lang 'Search Photos'}" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
             </ul>
           </li>
         {/if}
@@ -117,6 +96,16 @@
 
     {* Member Menu *}
       {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user }
+          <li class="dropdown">
+            <a href="{{ $design->url('user','visitor','index') }}" title="{lang 'Who Visited My Profile'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
+              <i class="fa fa-eye"></i> {lang 'Who See Me'}
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="{{ $design->url('user','visitor','index') }}" title="{lang 'Who Visited My Profile'}">{lang 'Who See Me'}</a></li>
+              <li><a href="{{ $design->url('user','visitor','search') }}" title="{lang 'Find who visited my profile'}">{lang 'Find Visitor(s)'}</a></li>
+            </ul>
+          </li>
+
           {if $is_mail_enabled}
             <li class="dropdown">
               <a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Messages'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
@@ -158,19 +147,10 @@
               <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change Profile Photo'}"><i class="fa fa-upload"></i> {lang 'Change Profile Photo'}</a></li>
 
               {if $is_picture_enabled}
-                <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-picture-o"></i> {lang 'Photo Gallery'}</a>
+                <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-picture-o"></i> {lang 'Photo'}</a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ $design->url('picture','main','addalbum') }}" title="{lang 'Add an Album'}">{lang 'Add an Album'}</a></li>
-                    <li><a href="{{ $design->url('picture','main','albums',$username) }}" title="{lang 'My Albums'}" data-load="ajax">{lang 'My Albums'}</a></li>
-                  </ul>
-                </li>
-              {/if}
-
-              {if $is_note_enabled}
-                <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Note'}</a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ $design->url('note','main','add') }}" title="{lang 'Add a Note'}">{lang 'Add a Note'}</a></li>
-                    <li><a href="{{ $design->url('note','main','author',$username) }}" title="{lang 'My Notes'}">{lang 'My Notes'}</a></li>
+                    <li><a href="{{ $design->url('picture','main','addalbum') }}" title="{lang 'Add an Album'}">{lang 'Add Photos'}</a></li>
+                    <li><a href="{{ $design->url('picture','main','albums',$username) }}" title="{lang 'My Albums'}" data-load="ajax">{lang 'My Photos'}</a></li>
                   </ul>
                 </li>
               {/if}
@@ -186,16 +166,6 @@
                   </ul>
                 </li>
               {/if}
-
-              <li class="menu-item dropdown dropdown-submenu">
-                <a href="{{ $design->url('user','visitor','index') }}" title="{lang 'Who Visited My Profile'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
-                  <i class="fa fa-eye"></i> {lang 'Who See Me'}
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="{{ $design->url('user','visitor','index') }}" title="{lang 'Who Visited My Profile'}">{lang 'Who See Me'}</a></li>
-                  <li><a href="{{ $design->url('user','visitor','search') }}" title="{lang 'Find who visited my profile'}">{lang 'Find Visitor(s)'}</a></li>
-                </ul>
-              </li>
 
               <li><a href="{{ $design->url('user','main','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
             </ul>
@@ -304,19 +274,6 @@
               </li>
             {/if}
 
-            {if $is_note_enabled}
-              <li><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note Posts'}"><i class="fa fa-newspaper-o"></i> {lang 'Note'}</a></li>
-            {/if}
-
-            {if $is_game_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-gamepad"></i> {lang 'Game'}</a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}">{lang 'Admin Game'}</a></li>
-                  <li><a href="{{ $design->url('game','admin','add') }}" title="{lang 'Add a Game'}">{lang 'Add a Game'}</a></li>
-                </ul>
-              </li>
-            {/if}
-
             {if $is_affiliate_enabled}
               <li class="menu-item dropdown dropdown-submenu">
                 <a href="{{ $design->url('affiliate','admin','index') }}" title="{lang 'Affiliate Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
@@ -377,7 +334,6 @@
             $count_moderate_total_picture = $oModeratorModel->totalPictures();
             $count_moderate_total_avatar = $oModeratorModel->totalAvatars();
             $count_moderate_total_background = $oModeratorModel->totalBackgrounds();
-            $count_moderate_total_note = $oModeratorModel->totalNotes();
 
             unset($oModeratorModel);
           }}
@@ -391,15 +347,6 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{lang 'Moderate Pictures'}"><i class="fa fa-picture-o"></i> {lang 'Photos'} {if $count_moderate_total_picture }<span class="badge">{count_moderate_total_picture}</span>{/if}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Profile Photos'}"><i class="fa fa-picture-o"></i> {lang 'Profile Photos'} {if $count_moderate_total_avatar }<span class="badge">{count_moderate_total_avatar}</span>{/if}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}"><i class="fa fa-picture-o"></i> {lang 'Profile Backgrounds'} {if $count_moderate_total_background}<span class="badge">{count_moderate_total_background}</span>{/if}</a></li>
-
-            {if $is_note_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Notes'} {if $count_moderate_total_note}<span class="badge">{count_moderate_total_note}</span>{/if}</a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="{{ $design->url('note','admin','unmoderated') }}" title="{lang 'Unmoderated Note Posts'}">{lang 'Unmoderated Notes'} {if $count_moderate_total_note}<span class="badge">{count_moderate_total_note}</span>{/if}</a></li>
-                  <li><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note Posts'}">{lang 'All Notes'}</a></li>
-                </ul>
-              </li>
-            {/if}
 
             {if $is_webcam_enabled}
               <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturewebcam') }}" title="{lang 'Moderate the Webcam Pictures'}"><i class="fa fa-camera"></i> {lang 'Webcam Pictures'}</a></li>
